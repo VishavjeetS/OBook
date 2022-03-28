@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/drawable-v24/roundstyle.xml" value="0.26871794871794874" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_choose.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_main.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_name_change.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_pass_change.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_sign_up.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_welcome.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_book.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_browse.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_multi.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_settings.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/OBook/app/src/main/res/menu/menu_items.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/app/src/main/res/drawable-v24/ic_arrow_back.xml" value="0.2490740740740741" />
+        <entry key="..\:/AndroidStudioProjects/app/src/main/res/drawable-v24/roundstyle.xml" value="0.13425925925925927" />
+        <entry key="..\:/AndroidStudioProjects/app/src/main/res/drawable/edittext_shadow.xml" value="0.2490740740740741" />
+        <entry key="..\:/AndroidStudioProjects/app/src/main/res/layout/activity_login.xml" value="0.25677083333333334" />
+        <entry key="..\:/AndroidStudioProjects/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
+        <entry key="..\:/AndroidStudioProjects/app/src/main/res/layout/activity_welcome.xml" value="0.264" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable-v24/roundstyle.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/bgndblur.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_main.xml" value="0.25677083333333334" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_book.xml" value="0.25677083333333334" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_browse.xml" value="0.25677083333333334" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_settings.xml" value="0.25677083333333334" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/menu/menu_items.xml" value="0.25677083333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

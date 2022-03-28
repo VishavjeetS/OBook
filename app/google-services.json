@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "907925907246",
+    "project_id": "obook-c5686",
+    "storage_bucket": "obook-c5686.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907925907246:android:fb0f3acb68ee1535b5bcbf",
+        "android_client_info": {
+          "package_name": "com.example.obook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "907925907246-3vv27l48tud42urnc8hi5dkiqrclfain.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApdLsLhcL1V6XBxD_3V46kP0YDmTjgDTo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "907925907246-3vv27l48tud42urnc8hi5dkiqrclfain.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
