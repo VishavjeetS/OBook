@@ -1,28 +1,19 @@
-package com.example.obook
+package com.example.obook.util
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.google.android.gms.tasks.OnSuccessListener
 import kotlinx.android.synthetic.main.activity_pass_change.*
 import com.google.firebase.auth.FirebaseAuth
 
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.EmailAuthProvider
 
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.activity_main.*
-import androidx.annotation.NonNull
-import androidx.appcompat.widget.Toolbar
-import com.example.obook.Fragments.SettingsFragment
-
-import com.google.android.gms.tasks.OnFailureListener
+import com.example.obook.MainActivity
+import com.example.obook.R
 
 class passChange : AppCompatActivity() {
     lateinit var newPass:EditText

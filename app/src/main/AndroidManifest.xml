@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OBook">
         <activity
-            android:name=".passChange"
+            android:name=".util.passChange"
             android:exported="false" />
         <activity
-            android:name=".nameChange"
+            android:name=".util.nameChange"
             android:exported="true" />
         <activity
             android:name=".Welcome"
@@ -28,17 +28,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUp"
+            android:name=".util.SignUp"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Login"
+            android:name=".util.Login"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".detailActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
     </application>
 
 </manifest>

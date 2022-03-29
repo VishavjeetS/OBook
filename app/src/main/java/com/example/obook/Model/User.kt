@@ -1,4 +1,4 @@
-package com.example.obook
+package com.example.obook.Model
 
 class User {
     private var uid: String = ""

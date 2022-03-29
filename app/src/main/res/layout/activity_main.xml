@@ -16,37 +16,7 @@
             android:id="@+id/toolbar_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/back">
-
-            <ImageView
-                android:id="@+id/backButton"
-                android:layout_width="23dp"
-                android:layout_height="23dp"
-                android:backgroundTint="@color/black"
-                android:src="@drawable/ic_arrow_back" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:cardCornerRadius="250dp"
-                app:cardBackgroundColor="@color/white">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="250dp"
-                    android:layout_gravity="center">
-
-                    <ImageView
-                        android:id="@+id/imgV"
-                        android:layout_width="60dp"
-                        android:layout_height="60dp"
-                        android:src="@drawable/background"
-                        android:scaleType="centerCrop"/>
-
-                </androidx.cardview.widget.CardView>
-
-            </androidx.cardview.widget.CardView>
+            android:background="@color/dark_gray">
 
             <TextView
                 android:id="@+id/toolbarText"
@@ -54,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
                 android:text="Hey, User"
-                android:textColor="@color/black"/>
+                android:textColor="@color/white"/>
 
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -63,7 +33,7 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/back"
+        android:background="@color/dark_gray"
         app:tabTextColor="@color/white"
         app:tabIndicatorColor="@android:color/holo_red_dark"/>
 

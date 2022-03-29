@@ -6,7 +6,7 @@
     android:background="#f7f7f7"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".nameChange">
+    tools:context=".util.nameChange">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"

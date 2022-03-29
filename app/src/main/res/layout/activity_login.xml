@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/login"
-    tools:context=".Login">
+    tools:context=".util.Login">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarLayout"
@@ -49,7 +49,7 @@
         android:id="@+id/fp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sign"
+        android:layout_below="@+id/gsign"
         android:layout_marginStart="24dp"
         android:onClick="forpass"
         android:text="@string/forgot_passsword"
@@ -60,12 +60,12 @@
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sign"
-        android:textColor="@color/white"
+        android:layout_below="@+id/gsign"
         android:layout_marginStart="150dp"
         android:layout_toRightOf="@+id/fp"
         android:onClick="signUp"
         android:text="Sign up"
+        android:textColor="@color/white"
         android:textSize="15sp" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -79,6 +79,20 @@
         android:backgroundTint="@color/back"
         android:onClick="signIn"
         android:text="Sign In"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/gsign"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/sign"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/roundstyle"
+        android:backgroundTint="@color/back"
+        android:onClick="signIn"
+        android:text="Sign In With Google"
         android:textColor="@color/white"
         android:textSize="20dp" />
 

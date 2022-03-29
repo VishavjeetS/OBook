@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SignUp">
+    tools:context=".util.SignUp">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarLayout"
@@ -97,7 +97,6 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/roundstyle"
         android:backgroundTint="@color/back"
-        android:onClick="signUp"
         android:text="Signup"
         android:textColor="@color/white"
         android:textSize="20dp" />

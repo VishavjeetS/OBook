@@ -1,4 +1,4 @@
-package com.example.obook
+package com.example.obook.util
 
 import android.content.ContentValues.TAG
 import android.content.Intent
@@ -7,13 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
-import com.example.obook.Fragments.SettingsFragment
-import com.google.firebase.auth.FirebaseAuth
+import com.example.obook.MainActivity
+import com.example.obook.R
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_name_change.*
 import java.lang.Exception
 
