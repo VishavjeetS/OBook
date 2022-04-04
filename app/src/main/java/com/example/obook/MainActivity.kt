@@ -9,16 +9,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.example.obook.util.BrowseFragment
-import com.example.obook.util.SettingsFragment
 import com.example.obook.Model.User
-import com.example.obook.util.Login
+import com.example.obook.util.*
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -27,12 +26,23 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var refUsers: DatabaseReference
     private lateinit var firebaseUser: FirebaseUser
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar_main)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.title = ""
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        toolbar.navigationIcon = null
+
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = this.resources.getColor(R.color.back)
+
 
         firebaseUser = FirebaseAuth.getInstance().currentUser!!
         refUsers = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser.uid)
@@ -52,27 +62,23 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-            val toolbar: Toolbar = findViewById(R.id.toolbar_main)
-            setSupportActionBar(toolbar)
-            supportActionBar!!.title = ""
-            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-            toolbar.navigationIcon = null
-
-            val window = this.window
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-            window.statusBarColor = this.resources.getColor(R.color.back)
-
-            val tabLayout: TabLayout = findViewById(R.id.tablayout)
-            val viewPager: ViewPager = findViewById(R.id.viewpager)
-            val viewPagerAdapter = ViewPagerAdapter(supportFragmentManager)
-
-            viewPagerAdapter.addfragment(BrowseFragment(), "Browse Movies")
-            viewPagerAdapter.addfragment(SettingsFragment(), "Settings")
-
-            viewPager.adapter = viewPagerAdapter
-            tablayout.setupWithViewPager(viewPager)
+        val popular = Popular()
+        val settings = SettingsFragment()
+        val favorite = TopRated()
+        makeCurrentScreen(popular)
+        nav_bar.setOnNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.home -> makeCurrentScreen(popular)
+                R.id.favourite -> makeCurrentScreen(favorite)
+                R.id.settings -> makeCurrentScreen(settings)
+            }
+            true
         }
+        }
+    private fun makeCurrentScreen(fragment: Fragment) = supportFragmentManager.beginTransaction().apply {
+        replace(R.id.wrapper_frame, fragment)
+        commit()
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
@@ -85,42 +91,13 @@ class MainActivity : AppCompatActivity() {
             R.id.help_item -> Toast.makeText(applicationContext, "Help", Toast.LENGTH_SHORT)
                 .show()
             R.id.logout_item -> {
-                val intent = Intent(this, Login::class.java)
-                startActivity(intent)
+                FirebaseAuth.getInstance().signOut()
+                startActivity(Intent(applicationContext, Welcome::class.java))
+                Toast.makeText(applicationContext,"Log out", Toast.LENGTH_SHORT).show()
                 this.finish()
             }
         }
         return super.onOptionsItemSelected(item);
-    }
-
-}
-
-class ViewPagerAdapter(fragmentManager: FragmentManager) :
-    FragmentStatePagerAdapter(fragmentManager) {
-
-    private val fragments: ArrayList<Fragment>
-    private val titles: ArrayList<String>
-
-    init {
-        fragments = ArrayList<Fragment>()
-        titles = ArrayList<String>()
-    }
-
-    override fun getCount(): Int {
-        return fragments.size
-    }
-
-    override fun getItem(position: Int): Fragment {
-        return fragments[position]
-    }
-
-    fun addfragment(fragment: Fragment, title: String) {
-        fragments.add(fragment)
-        titles.add(title)
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return titles[position]
     }
 
 }

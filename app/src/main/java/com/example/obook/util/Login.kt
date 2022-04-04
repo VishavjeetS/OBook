@@ -136,6 +136,7 @@ class Login : AppCompatActivity() {
 
                 //Start Profile Activity
                 startActivity(Intent(this, MainActivity::class.java))
+                this.finish()
 
             }
             .addOnFailureListener { e ->
@@ -162,7 +163,7 @@ class Login : AppCompatActivity() {
                         val intent = Intent(this, MainActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
-                        this.finish()
+                        finish()
                     }
                     else{
                         Toast.makeText(applicationContext, "Error Message: "+task.exception!!.message.toString(), Toast.LENGTH_LONG).show()

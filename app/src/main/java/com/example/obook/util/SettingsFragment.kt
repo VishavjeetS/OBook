@@ -20,6 +20,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.obook.Welcome
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -27,6 +28,7 @@ class SettingsFragment : Fragment() {
     lateinit var listView:ListView
     lateinit var al : ArrayList<String>
     lateinit var aa:ArrayAdapter<String>
+    lateinit var mauth: FirebaseAuth
     lateinit var alertDialog:AlertDialog
     lateinit var imageUri: Uri
     lateinit var imagc : ActivityResultLauncher<Intent>
@@ -40,6 +42,8 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mauth = FirebaseAuth.getInstance()
 
         listView = view.findViewById(R.id.list)
         al = ArrayList()
@@ -59,8 +63,10 @@ class SettingsFragment : Fragment() {
                     startActivity(Intent)
                 }
                 al[2] -> {
-                    val Intent = Intent(view.context, Welcome::class.java)
-                    startActivity(Intent)
+                    FirebaseAuth.getInstance().signOut()
+                    startActivity(Intent(requireContext(), Welcome::class.java))
+                    Toast.makeText(requireContext(),"Log out", Toast.LENGTH_SHORT).show()
+                    requireActivity().finish()
                 }
             }
         }

@@ -18,4 +18,6 @@
     <string name="help">Help</string>
     <string name="log_out">Log Out</string>
     <string name="web_server_client">907925907246-3vv27l48tud42urnc8hi5dkiqrclfain.apps.googleusercontent.com</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>
