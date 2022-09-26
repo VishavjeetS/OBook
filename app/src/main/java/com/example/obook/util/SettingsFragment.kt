@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.example.obook.R
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.util.Log
 import android.widget.*
@@ -47,7 +48,7 @@ class SettingsFragment : Fragment() {
 
         listView = view.findViewById(R.id.list)
         al = ArrayList()
-        aa = ArrayAdapter<String>(requireActivity(),android.R.layout.simple_list_item_1, al)
+        aa = ArrayAdapter<String>(requireActivity(),R.layout.list_white_items, al)
         listView.adapter = aa
         al.add("Change Name")
         al.add("Change Password")

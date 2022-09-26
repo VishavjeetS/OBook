@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.obook.Adapter.MovieAdapter
@@ -31,7 +32,9 @@ class Popular:Fragment() {
     ): View? {
         val v = inflater.inflate(R.layout.popular, container, false)
         recyclerView = v.findViewById(R.id.movie_recycler)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val gridLayoutManager = GridLayoutManager(requireContext(), 2)
+//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = gridLayoutManager
         recyclerView.setHasFixedSize(true)
         getMovieData { movies: List<Movies> ->
             Collections.sort(movies,
