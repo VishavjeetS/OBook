@@ -59,6 +59,7 @@ class passChange : AppCompatActivity() {
                             val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             Toast.makeText(this, "Password Changed Successfully", Toast.LENGTH_SHORT).show()
+                            finish()
                         }
                         else{
                             Toast.makeText(this, task.exception?.message.toString(), Toast.LENGTH_SHORT).show()

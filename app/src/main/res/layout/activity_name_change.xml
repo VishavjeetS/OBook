@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#f7f7f7"
+    android:background="@color/black"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".util.nameChange">
@@ -11,7 +11,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/back"
+        android:background="@color/black"
+        android:backgroundTint="@color/black"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp">
 
@@ -20,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:layout_marginTop="10dp"
             app:theme="@style/AppTheme.Toolbar">
 
             <RelativeLayout
@@ -29,11 +31,12 @@
 
                 <ImageView
                     android:id="@+id/back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:src="@drawable/ic_keyboard_arrow_left_dark_gray_24dp" />
+                    android:src="@drawable/ic_keyboard_arrow_left_dark_gray_24dp"
+                    app:tint="@color/white" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -41,9 +44,9 @@
                     android:layout_marginLeft="36dp"
                     android:layout_marginRight="36dp"
                     android:fontFamily="@font/calibri"
-                    android:text="Profile"
+                    android:text="Name"
                     android:textAlignment="center"
-                    android:textColor="#4e4e50"
+                    android:textColor="@color/white"
                     android:textSize="26sp" />
 
             </RelativeLayout>
@@ -52,35 +55,47 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        android:textSize="25sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"/>
-
-    <EditText
-        android:id="@+id/name_update"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="24dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="16dp"
-        android:autofillHints="name"
-        android:inputType="textPersonName" />
-
-    <Button
-        android:id="@+id/changename"
-        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundstyle"
-        android:text="Update Name"
-        android:layout_gravity="center_horizontal"/>
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"/>
+
+        <EditText
+            android:id="@+id/name_update"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:hint="name"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="16dp"
+            android:autofillHints="name"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/changename"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundstyle"
+            android:text="Update"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
 
 </LinearLayout>

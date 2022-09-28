@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import com.example.obook.MainActivity
@@ -14,6 +15,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_name_change.*
+import kotlinx.android.synthetic.main.fragment_settings.*
 import java.lang.Exception
 
 class nameChange : AppCompatActivity() {
@@ -54,8 +56,8 @@ class nameChange : AppCompatActivity() {
         }
 
         back.setOnClickListener {
-            val intent = Intent(this, SettingsFragment::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
     }

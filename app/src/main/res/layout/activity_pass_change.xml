@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     tools:context=".util.passChange">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -12,6 +13,7 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:background="@drawable/strip_bg"
+        android:backgroundTint="@color/black"
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
@@ -19,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:popupTheme="@style/AppTheme.PopupOverlay"
-            android:background="@color/back"
+            android:background="@color/black"
+            android:layout_marginTop="10dp"
             app:theme="@style/AppTheme.Toolbar">
 
             <RelativeLayout
@@ -34,7 +37,8 @@
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:backgroundTint="@color/white"
-                    android:src="@drawable/ic_keyboard_arrow_left_dark_gray_24dp" />
+                    android:src="@drawable/ic_keyboard_arrow_left_dark_gray_24dp"
+                    android:tint="@color/white" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -44,7 +48,7 @@
                     android:fontFamily="@font/calibri"
                     android:text="Password"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="26sp" />
 
             </RelativeLayout>
@@ -53,51 +57,66 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Password"
-        android:textSize="25sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="50dp"/>
-
-    <EditText
-        android:id="@+id/new_pass"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:hint="new passwrod"
-        android:inputType="textPassword" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Confirm Password"
-        android:textSize="25sp"
-        android:layout_marginStart="20dp" />
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Password"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="50dp"/>
 
-    <EditText
-        android:id="@+id/confirm_pass"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:hint="confirm password"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/new_pass"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/white"
+            android:hint="new passwrod"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/changename"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/roundstyle"
-        android:text="Update Password"
-        android:onClick="updatePass"
-        android:textSize="16sp"
-        android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm Password"
+            android:textSize="25sp"
+            android:textColor="@color/white"
+            android:layout_marginStart="20dp" />
+
+        <EditText
+            android:id="@+id/confirm_pass"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:hint="confirm password"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:inputType="textPassword" />
+
+        <Button
+            android:id="@+id/changename"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundstyle"
+            android:text="Update"
+            android:onClick="updatePass"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
 
 </LinearLayout>
