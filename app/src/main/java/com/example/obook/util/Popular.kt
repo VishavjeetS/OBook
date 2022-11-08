@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.obook.Adapter.MovieAdapter
+import com.example.obook.Model.Movie
 import com.example.obook.Model.MovieResponse
 import com.example.obook.Model.Movies
 import com.example.obook.R
@@ -23,6 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 class Popular:Fragment() {
     private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500"

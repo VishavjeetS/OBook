@@ -1,26 +1,20 @@
 package com.example.obook.Model
 
 class User {
+    private var instance: User? = null
     private var uid: String = ""
     private var name: String = ""
     private var email: String = ""
-    private var favList: ArrayList<Movies>? = null
+    private var favList: ArrayList<Movie> = arrayListOf()
 
-    constructor()
-
-    constructor(
-        uid: String,
-        name: String,
-        email: String,
-        favList: ArrayList<Movies>
-    ) {
-        this.uid = uid
-        this.name = name
-        this.email = email
-        this.favList = favList
+    fun getInstance(): User{
+        if(instance == null){
+            instance = User()
+        }
+        return instance!!
     }
 
-    fun getUID(): String?{
+    fun getUID(): String{
         return uid
     }
 
@@ -44,11 +38,11 @@ class User {
         this.email = email
     }
 
-    fun setFavList(favList: ArrayList<Movies>){
+    fun setFavList(favList: ArrayList<Movie>){
         this.favList = favList
     }
 
-    fun getFavList(): ArrayList<Movies>{
-        return favList!!
+    fun getFavList(): ArrayList<Movie>{
+        return favList
     }
 }

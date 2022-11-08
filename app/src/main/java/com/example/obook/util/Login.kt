@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.edpass
 import kotlinx.android.synthetic.main.activity_login.sign
 
-class Login : AppCompatActivity() {
+class Login : AppCompatActivity(), FirebaseAuth.AuthStateListener {
     lateinit var mAuth: FirebaseAuth
     private lateinit var auth: FirebaseAuth
     private lateinit var signInRequest: BeginSignInRequest
@@ -112,6 +112,29 @@ class Login : AppCompatActivity() {
                 Log.d("Error", "Google Sign in failed ", e)
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        FirebaseAuth.getInstance().addAuthStateListener(this)
+        if(FirebaseAuth.getInstance().currentUser!=null){
+            val intent = Intent(this,MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
+    override fun onAuthStateChanged(p0: FirebaseAuth) {
+//        if(p0.currentUser!=null){
+//            val intent = Intent(this,MainActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        FirebaseAuth.getInstance().removeAuthStateListener(this)
     }
 
     private fun firebaseAuthWithGoogle(idToken: String?) {

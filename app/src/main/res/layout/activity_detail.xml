@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,87 +10,107 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="7dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="7dp">
 
         <ImageView
             android:id="@+id/detailImage"
             android:layout_width="match_parent"
             android:layout_height="700dp"
-            android:layout_marginTop="-100dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="-100dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-100dp"
-            android:paddingStart="15dp"
             android:background="@drawable/gradient_background"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingStart="15dp">
+
             <TextView
                 android:id="@+id/title1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Title"
-                android:textStyle="bold"
-                android:textSize="30sp"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/white"/>
+                android:text="Title"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/overview1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Description"
-                android:textSize="15sp"
                 android:layout_marginTop="15dp"
-                android:textColor="@color/white"/>
+                android:text="Description"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Release Date: "
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="7dp"
-                    android:textColor="@color/white"/>
+                    android:text="Release Date: "
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/date1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10-20-2021"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/white"/>
+                    android:text="10-20-2021"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Votes: "
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="7dp"
-                    android:textColor="@color/white"/>
+                    android:text="Votes: "
+                    android:textColor="@color/white" />
 
                 <TextView
                     android:id="@+id/votes1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1000"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/white"/>
+                    android:text="1000"
+                    android:textColor="@color/white" />
             </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/fav_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-5dp"
+                android:text="Add to favourite"
+                android:textAllCaps="false"
+                android:textSize="17sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Added"
+                android:textSize="20sp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
     </LinearLayout>
-
 
 
 </ScrollView>

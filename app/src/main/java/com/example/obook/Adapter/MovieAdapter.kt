@@ -2,14 +2,19 @@ package com.example.obook.Adapter
 
 import android.content.Intent
 import android.telecom.Call
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.obook.Model.Movie
 import com.example.obook.R
 import com.example.obook.Model.Movies
+import com.example.obook.Model.User
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MovieAdapter(private val movies:List<Movies>):RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
