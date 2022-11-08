@@ -6,6 +6,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.obook.MainActivity
@@ -50,7 +51,10 @@ class Login : AppCompatActivity() {
         supportActionBar!!.title = "Login"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = this.resources.getColor(R.color.black)
 
         signInRequest = BeginSignInRequest.builder()
             .setGoogleIdTokenRequestOptions(
@@ -75,11 +79,19 @@ class Login : AppCompatActivity() {
 
         sign.setOnClickListener {
             loginUser()
+            this.finish()
         }
         gsign.setOnClickListener {
             Log.d(TAG, "OnCreate: begin Google SignIn")
             val intent = mGoogleSignInClient.signInIntent
             startActivityForResult(intent, RC_SIGN_IN)
+        }
+
+        skipsign.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("Not Sign", "0")
+            startActivity(intent)
+            this.finish()
         }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -101,6 +113,7 @@ class Login : AppCompatActivity() {
             }
         }
     }
+
     private fun firebaseAuthWithGoogle(idToken: String?) {
         Log.d(TAG, "firebaseAuthWithGoogleAccount: begin firebase auth with google account")
         val credential = GoogleAuthProvider.getCredential(idToken, null)
@@ -136,7 +149,7 @@ class Login : AppCompatActivity() {
 
                 //Start Profile Activity
                 startActivity(Intent(this, MainActivity::class.java))
-                this.finish()
+                finish()
 
             }
             .addOnFailureListener { e ->
@@ -176,10 +189,9 @@ class Login : AppCompatActivity() {
     fun signUp(view: android.view.View) {
         val intent = Intent(this, SignUp::class.java)
         startActivity(intent)
-        this.finish()
     }
+
     fun forpass(view: android.view.View) {
 
     }
-    fun signIn(view: android.view.View) {}
 }

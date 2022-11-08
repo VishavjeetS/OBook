@@ -1,8 +1,10 @@
 package com.example.obook.util
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
@@ -13,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.sign
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUp : AppCompatActivity() {
@@ -28,8 +31,14 @@ class SignUp : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.title = "Register"
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        val window = this.window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.statusBarColor = this.resources.getColor(R.color.black)
+
         toolbar.setNavigationOnClickListener {
-            val intent = Intent(applicationContext, Welcome::class.java)
+            val intent = Intent(applicationContext, Login::class.java)
             startActivity(intent)
             finish()
         }
@@ -88,5 +97,6 @@ class SignUp : AppCompatActivity() {
     fun signin(view: android.view.View) {
         val intent = Intent(this, Login::class.java)
         startActivity(intent)
+        finish()
     }
 }

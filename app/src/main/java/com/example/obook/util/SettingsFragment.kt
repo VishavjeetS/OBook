@@ -65,7 +65,7 @@ class SettingsFragment : Fragment() {
                 }
                 al[2] -> {
                     FirebaseAuth.getInstance().signOut()
-                    startActivity(Intent(requireContext(), Welcome::class.java))
+                    startActivity(Intent(requireContext(), Login::class.java))
                     Toast.makeText(requireContext(),"Log out", Toast.LENGTH_SHORT).show()
                     requireActivity().finish()
                 }

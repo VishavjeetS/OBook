@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="200dp"
-    android:layout_height="290dp"
-    android:layout_marginBottom="10dp"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="10dp"
     android:background="@color/black"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="20dp">
+    android:layout_margin="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -22,14 +22,15 @@
                     android:id="@+id/poster"
                     android:layout_width="120dp"
                     android:layout_height="150dp"
-                    android:layout_margin="5dp"
+                    android:layout_marginTop="5dp"
+                    android:padding="5dp"
                     android:src="@drawable/ic_launcher_background"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:weightSum="3"
+                android:layout_marginBottom="4dp"
                 android:layout_gravity="center"
                 android:orientation="vertical">
                 <TextView
@@ -38,28 +39,7 @@
                     android:layout_height="wrap_content"
                     android:text="Movie Title"
                     android:textSize="18sp"
-                    android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_marginBottom="15dp"
-                    android:textColor="@color/white"/>
-                <TextView
-                    android:id="@+id/release_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Release Date"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:textColor="@color/white"/>
-                <TextView
-                    android:id="@+id/vote_count"
-                    android:layout_marginTop="15dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ratings"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_weight="1"
                     android:textColor="@color/white"/>
             </LinearLayout>
         </LinearLayout>

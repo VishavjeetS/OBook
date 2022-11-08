@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/login"
+    android:background="@color/black"
     tools:context=".util.Login">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -19,17 +19,18 @@
             android:id="@+id/toolbar_register"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/back"
+            android:background="@color/black"
             app:popupTheme="@style/Theme.OBook.PopupOverlay"/>
     </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
         android:id="@+id/t1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
         android:layout_below="@id/appbarLayout"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
-        android:text="Hello Again!"
+        android:text="Hello,"
         android:textColor="@color/back"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -51,17 +52,31 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/gsign"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="10dp"
         android:onClick="forpass"
+        android:visibility="gone"
         android:text="@string/forgot_passsword"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/skipsign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:text="Skip Sign In"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/gsign"
-        android:layout_marginStart="150dp"
+        android:layout_marginStart="300dp"
+        android:layout_marginTop="10dp"
         android:layout_toRightOf="@+id/fp"
         android:onClick="signUp"
         android:text="Sign up"
@@ -70,25 +85,26 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/sign"
-        android:layout_width="320dp"
+        android:layout_width="220dp"
         android:layout_height="60dp"
         android:layout_below="@+id/edpass"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:background="@drawable/roundstyle"
         android:backgroundTint="@color/back"
-        android:onClick="signIn"
+        android:gravity="center"
         android:text="Sign In"
         android:textColor="@color/white"
         android:textSize="20dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/gsign"
-        android:layout_width="320dp"
+        android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_below="@+id/sign"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
+        android:gravity="center"
         android:background="@drawable/roundstyle"
         android:backgroundTint="@color/back"
         android:onClick="signIn"
@@ -104,9 +120,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="20dp"
-        android:hint="@string/username_email"
+        android:backgroundTint="@color/white"
+        android:hint="email"
         android:inputType="text"
         android:textColor="@android:color/white"
+        android:textColorHint="@color/white"
         android:textSize="20dp" />
 
     <EditText
@@ -117,10 +135,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="10dp"
-        android:hint="@string/password"
+        android:hint="password"
         android:inputType="textPassword"
         android:text=""
-        android:textColor="@android:color/black"
+        android:backgroundTint="@color/white"
+        android:textColor="@android:color/white"
+        android:textColorHint="@color/white"
         android:textSize="20dp" />
 
 </RelativeLayout>

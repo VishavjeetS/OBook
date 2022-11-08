@@ -1,33 +1,33 @@
 package com.example.obook
 
-
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.example.obook.Model.User
 import com.example.obook.util.*
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.collections.ArrayList
+import kotlinx.android.synthetic.main.activity_main2.*
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var refUsers: DatabaseReference
     private lateinit var firebaseUser: FirebaseUser
+    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var drawer: DrawerLayout
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,24 +43,43 @@ class MainActivity : AppCompatActivity() {
         window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
         window.statusBarColor = this.resources.getColor(R.color.black)
 
+        val intent = intent.getStringExtra("Not Sign")
+        drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
+        toggle = ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close)
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
 
-        firebaseUser = FirebaseAuth.getInstance().currentUser!!
-        refUsers = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser.uid)
-
-        refUsers.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val user: User? = snapshot.getValue(User::class.java)
-                    val name = user!!.getName()
-                    toolbarText.text = ("Hey, $name")
-                    toolbarText.setTextColor(Color.WHITE)
+        nav_view.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.fav -> {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(R.id.wrapper_frame, Favourite())
+                        commit()
+                    }
                 }
             }
+            true
+        }
 
-            override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
-            }
-        })
+        if(intent != "0"){
+            firebaseUser = FirebaseAuth.getInstance().currentUser!!
+            refUsers = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUser.uid)
+
+            refUsers.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        val user: User? = snapshot.getValue(User::class.java)
+                        val name = user!!.getName()
+                        toolbarText.text = ("Hey, $name")
+                        toolbarText.setTextColor(Color.WHITE)
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+            })
+        }
 
         val popular = Popular()
         val settings = SettingsFragment()
@@ -80,6 +99,14 @@ class MainActivity : AppCompatActivity() {
         commit()
     }
 
+    override fun onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_items, menu)
@@ -87,17 +114,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item)){
+            return true
+        }
         when (item.itemId) {
             R.id.help_item -> Toast.makeText(applicationContext, "Help", Toast.LENGTH_SHORT)
                 .show()
             R.id.logout_item -> {
                 FirebaseAuth.getInstance().signOut()
-                startActivity(Intent(applicationContext, Welcome::class.java))
+                startActivity(Intent(applicationContext, Login::class.java))
                 Toast.makeText(applicationContext,"Log out", Toast.LENGTH_SHORT).show()
                 this.finish()
             }
+            R.id.favourite -> makeCurrentScreen(Favourite())
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }

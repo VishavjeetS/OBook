@@ -10,14 +10,6 @@
     android:gravity="center"
     tools:context=".Welcome">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textStyle="bold"
-        android:text="@string/welcome"
-        android:textSize="35sp"/>
-
     <Button
         android:id="@+id/button_reg_welcome"
         android:layout_width="match_parent"
@@ -41,6 +33,8 @@
         android:layout_marginRight="20dp"
         android:textColor="@color/white"
         android:backgroundTint="@color/colorPrimaryDark"/>
+
+
 
 
 </LinearLayout>

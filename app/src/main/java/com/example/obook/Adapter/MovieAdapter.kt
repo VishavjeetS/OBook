@@ -24,8 +24,8 @@ class MovieAdapter(private val movies:List<Movies>):RecyclerView.Adapter<MovieAd
         private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
         fun bindMovie(movie:Movies){
             itemView.movie_title.text = movie.title
-            itemView.release_date.text = movie.release_date
-            itemView.vote_count.text = movie.vote_count
+//            itemView.release_date.text = movie.release_date
+//            itemView.vote_count.text = movie.vote_count
             Glide.with(itemView).load(IMAGE_BASE + movie.poster_path).into(itemView.poster)
 
             itemView.setOnClickListener {

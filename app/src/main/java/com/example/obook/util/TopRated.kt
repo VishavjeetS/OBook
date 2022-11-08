@@ -50,6 +50,8 @@ class TopRated:Fragment() {
                     intent.putExtra("image", image)
                     intent.putExtra("title", movies[position].title.toString())
                     intent.putExtra("overview", movies[position].overview.toString())
+                    intent.putExtra("date", movies[position].release_date)
+                    intent.putExtra("popularity", movies[position].vote_count.toString())
                     startActivity(intent)
                 }
             })
