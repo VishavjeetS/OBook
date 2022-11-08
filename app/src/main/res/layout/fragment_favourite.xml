@@ -17,6 +17,18 @@
         android:textColor="@color/white"
         android:layout_marginTop="20sp"/>
 
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:text="Please Sign In."
+            android:gravity="center"
+            android:textSize="20sp"
+            android:visibility="gone"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/gray_600"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="10dp"
         android:id="@+id/fav_rec"

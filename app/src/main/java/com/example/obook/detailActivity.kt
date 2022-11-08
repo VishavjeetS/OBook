@@ -37,15 +37,17 @@ class detailActivity : AppCompatActivity() {
         val instance = User().getInstance()
         val localList:ArrayList<Movie> = arrayListOf()
 
+        if(!Constant().getInfo()){
+            fav_btn.text = "Please Sign in"
+            fav_btn.isClickable = false
+        }
+
+        println("Thisss" + Constant().getInfo())
+
         fav_btn.setOnClickListener {
-            if(Constant().USERSIGNIN == "0"){
-                fav_btn.error = "Please Sign in"
-            }
-            else{
                 localList.add(Movie(title!!, url))
                 Log.d("list", localList.toString())
                 Log.d("list", localList.size.toString())
-            }
         }
         instance.setFavList(localList)
         Log.d("list1", instance.getFavList().size.toString())

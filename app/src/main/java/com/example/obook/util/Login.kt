@@ -89,7 +89,7 @@ class Login : AppCompatActivity(), FirebaseAuth.AuthStateListener {
 
         skipsign.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("Not Sign", "0")
+            intent.putExtra("Not Sign", true)
             startActivity(intent)
             this.finish()
         }

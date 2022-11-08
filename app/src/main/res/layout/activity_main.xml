@@ -70,5 +70,6 @@
         app:itemTextColor="@color/white"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navigation_drawer"
-        app:menu="@menu/navigation_drawer" />
+        app:menu="@menu/navigation_drawer"
+        tools:ignore="RtlSymmetry" />
 </androidx.drawerlayout.widget.DrawerLayout>
