@@ -13,23 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OBook">
         <activity
-            android:name=".MainActivity2"
-            android:exported="true" />
-        <activity
-            android:name=".util.passChange"
-            android:exported="false" />
-        <activity
-            android:name=".util.nameChange"
-            android:exported="true" />
-        <activity
-            android:name=".Welcome"
-            android:exported="true"></activity>
-        <activity
-            android:name=".util.SignUp"
+            android:name=".Authentication.SignUp"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".util.Login"
+            android:name=".Authentication.Login"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -43,7 +31,7 @@
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".detailActivity"
+            android:name=".DetailActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 

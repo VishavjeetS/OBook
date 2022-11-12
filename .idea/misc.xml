@@ -23,6 +23,7 @@
         <entry key="..\:/AndroidStudioProjects/app/src/main/res/layout/activity_welcome.xml" value="0.264" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable-v24/roundstyle.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/bgndblur.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/gradient_background.xml" value="0.182" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/ic_heart.xml" value="0.182" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/movie_item_bg.xml" value="0.182" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_detail.xml" value="0.25677083333333334" />
@@ -36,7 +37,10 @@
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/content_main.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_book.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_browse.xml" value="0.25677083333333334" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_detail.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_favourite.xml" value="0.214123006833713" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_forgot_password.xml" value="0.25677083333333334" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_name_change.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_settings.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/list_white_items.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/main_navigation.xml" value="0.24094202898550723" />

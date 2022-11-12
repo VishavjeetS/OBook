@@ -1,13 +1,19 @@
 package com.example.obook.Model
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+import org.jetbrains.annotations.NotNull
 
 @Parcelize
+@Entity(tableName = "movies")
 data class Movies(
+    @PrimaryKey
     @SerializedName("id")
-    val id : String?,
+    val id : String,
     @SerializedName("title")
     val title: String?,
     @SerializedName("vote_count")

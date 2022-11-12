@@ -3,19 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/dark_gray"
-    tools:context=".util.Favourite">
+    tools:context=".Fragments.Favourite">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Favourite Movies"
-        android:textSize="25sp"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:layout_marginTop="20sp"/>
+        android:paddingTop="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Favourite Movies"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="remove all?"
+            android:textSize="17sp"
+            android:layout_marginStart="15dp"
+            android:id="@+id/removeAll"
+            android:gravity="center"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
         <TextView
             android:id="@+id/tv"
@@ -29,11 +46,38 @@
             android:layout_gravity="center_vertical"
             android:textColor="@color/gray_600"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="10dp"
-        android:id="@+id/fav_rec"
+    <TextView
+        android:id="@+id/movie_avail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/movie_item"/>
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:text="No movies available"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/gray_600"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            app:tint="@color/white"
+            app:backgroundTint="#30DC61"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_efresh"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fav_rec"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/movie_item" />
+    </RelativeLayout>
 
 </LinearLayout>

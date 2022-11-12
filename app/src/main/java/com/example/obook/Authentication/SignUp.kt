@@ -1,7 +1,6 @@
-package com.example.obook.util
+package com.example.obook.Authentication
 
 import android.content.Intent
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.WindowManager
@@ -9,13 +8,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.obook.MainActivity
+import com.example.obook.Model.User
 import com.example.obook.R
-import com.example.obook.Welcome
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login.sign
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUp : AppCompatActivity() {
@@ -54,6 +52,7 @@ class SignUp : AppCompatActivity() {
         name = edname.text.toString()
         val email:String = email.text.toString()
         val password:String = eDpassword.toString()
+        val userObj = User.getInstance()
 
         when {
             name == "" -> {
@@ -70,12 +69,14 @@ class SignUp : AppCompatActivity() {
                     if(task.isSuccessful){
                         firebaseUserID = mAuth.currentUser!!.uid
                         refUsers = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUserID)
-
                         val usersMap =HashMap<String, Any>()
                         usersMap["uid"] = firebaseUserID
                         usersMap["name"] = name
                         usersMap["email"] = email
-
+                        userObj.setName(name)
+                        userObj.setEmail(email)
+                        userObj.setUID(firebaseUserID)
+                        userObj.setPassword(password)
                         refUsers.updateChildren(usersMap)
                             .addOnCompleteListener { task ->
                                 if(task.isSuccessful){
@@ -97,6 +98,6 @@ class SignUp : AppCompatActivity() {
     fun signin(view: android.view.View) {
         val intent = Intent(this, Login::class.java)
         startActivity(intent)
-        finish()
+        this.finish()
     }
 }

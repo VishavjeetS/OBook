@@ -2,9 +2,8 @@ package com.example.obook
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.obook.util.SignUp
+import com.example.obook.Authentication.SignUp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 
@@ -18,7 +17,7 @@ class Welcome : AppCompatActivity(), FirebaseAuth.AuthStateListener {
         supportActionBar?.hide();
     }
     fun Login(view: android.view.View) {
-        val intent = Intent(this, com.example.obook.util.Login::class.java)
+        val intent = Intent(this, com.example.obook.Authentication.Login::class.java)
         startActivity(intent)
         this.finish()
     }

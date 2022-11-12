@@ -1,6 +1,5 @@
-package com.example.obook.util
+package com.example.obook.Fragments
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,21 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.obook.R
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Color
 import android.net.Uri
-import android.util.Log
 import android.widget.*
 
 import android.widget.AdapterView.OnItemClickListener
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import com.example.obook.Welcome
+import com.example.obook.Authentication.Login
+import com.example.obook.util.NameChange
+import com.example.obook.util.PasswordChange
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_main.*
 
 
 class SettingsFragment : Fragment() {
@@ -56,12 +50,10 @@ class SettingsFragment : Fragment() {
         listView.onItemClickListener = OnItemClickListener { parent, view, position, id ->
             when(al[position]){
                 al[0] -> {
-                    val Intent = Intent(view.context, nameChange::class.java)
-                    startActivity(Intent)
+                    makeCurrentScreen(NameChange())
                 }
                 al[1] -> {
-                    val Intent = Intent(view.context, passChange::class.java)
-                    startActivity(Intent)
+                    makeCurrentScreen(PasswordChange())
                 }
                 al[2] -> {
                     FirebaseAuth.getInstance().signOut()
@@ -71,5 +63,9 @@ class SettingsFragment : Fragment() {
                 }
             }
         }
+    }
+    private fun makeCurrentScreen(fragment: Fragment) = activity?.supportFragmentManager!!.beginTransaction().apply {
+        replace(R.id.frameLayout, fragment)
+        this.commit()
     }
 }

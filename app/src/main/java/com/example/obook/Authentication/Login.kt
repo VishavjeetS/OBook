@@ -1,28 +1,27 @@
-package com.example.obook.util
+package com.example.obook.Authentication
 
 import android.app.Activity
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
+import com.example.obook.util.ForgotPassword
 import com.example.obook.MainActivity
+import com.example.obook.Model.User
 import com.example.obook.R
-import com.example.obook.Welcome
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.edpass
@@ -152,6 +151,8 @@ class Login : AppCompatActivity(), FirebaseAuth.AuthStateListener {
                 val uid = firebaseUser!!.uid
                 val email = firebaseUser.email
 
+                val userObj = User.getInstance()
+
                 Log.d(TAG, "firebaseAuthWithGoogleAccount: Email: $email")
                 Log.d(TAG, "firebaseAuthWithGoogleAccount: Uid: $uid")
 
@@ -171,8 +172,10 @@ class Login : AppCompatActivity(), FirebaseAuth.AuthStateListener {
                 }
 
                 //Start Profile Activity
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("gSign", true)
+                startActivity(intent)
+                this.finish()
 
             }
             .addOnFailureListener { e ->
@@ -185,6 +188,9 @@ class Login : AppCompatActivity(), FirebaseAuth.AuthStateListener {
     private fun loginUser() {
         val email: String = edemail.text.toString()
         val password: String = edpass.text.toString()
+        val userObj = User.getInstance()
+        userObj.setEmail(email)
+        userObj.setPassword(password)
         when {
             email == "" -> {
                 Toast.makeText(this, "Please write email", Toast.LENGTH_LONG).show()
@@ -212,9 +218,14 @@ class Login : AppCompatActivity(), FirebaseAuth.AuthStateListener {
     fun signUp(view: android.view.View) {
         val intent = Intent(this, SignUp::class.java)
         startActivity(intent)
+        this.finish()
+
     }
 
-    fun forpass(view: android.view.View) {
-
+    fun forgotPass(view: View) {
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.loginFrame, ForgotPassword())
+            commit()
+        }
     }
 }

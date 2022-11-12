@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/dark_gray"
-    tools:context=".util.SettingsFragment">
+    tools:context=".Fragments.SettingsFragment">
 
     <ListView
         android:id="@+id/list"
@@ -15,7 +15,7 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:visibility="gone"/>
+        android:visibility="visible"/>
 </LinearLayout>

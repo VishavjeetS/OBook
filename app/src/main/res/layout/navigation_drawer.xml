@@ -4,11 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginStart="24dp"
-        android:src="@mipmap/ic_launcher"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ProfImg"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/profile"
+        android:layout_gravity="center"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,6 +20,17 @@
         android:textSize="30sp"
         android:layout_marginStart="24dp"
         android:id="@+id/username"
+        android:textColor="@color/white"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        android:text="User #" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:layout_marginStart="24dp"
+        android:id="@+id/email"
         android:textColor="@color/white"
         android:textAppearance="?attr/textAppearanceHeadlineSmall"
         android:text="User #" />

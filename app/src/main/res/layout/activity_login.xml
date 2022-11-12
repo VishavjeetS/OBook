@@ -1,146 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/black"
-    tools:context=".util.Login">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbarLayout"
+        android:id="@+id/loginFrame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.OBook.AppBarOverlay"
-        tools:ignore="MissingConstraints">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_register"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/black"
+        tools:context=".Authentication.Login">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black"
-            app:popupTheme="@style/Theme.OBook.PopupOverlay"/>
-    </com.google.android.material.appbar.AppBarLayout>
+            android:theme="@style/Theme.OBook.AppBarOverlay"
+            tools:ignore="MissingConstraints">
 
-    <TextView
-        android:id="@+id/t1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/appbarLayout"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="10dp"
-        android:text="Hello,"
-        android:textColor="@color/back"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/black"
+                app:popupTheme="@style/Theme.OBook.PopupOverlay"/>
+        </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/t2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/t1"
-        android:layout_marginStart="25dp"
-        android:text="Welcome back"
-        android:textColor="@color/back"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appbarLayout"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:text="Hello,"
+            android:textColor="@color/back"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/fp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gsign"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="10dp"
-        android:onClick="forpass"
-        android:visibility="gone"
-        android:text="@string/forgot_passsword"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t1"
+            android:layout_marginStart="25dp"
+            android:text="Welcome back"
+            android:textColor="@color/back"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/skipsign"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:text="Skip Sign In"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        android:gravity="center"/>
+        <TextView
+            android:id="@+id/fp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gsign"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="10dp"
+            android:clickable="true"
+            android:onClick="forgotPass"
+            android:text="@string/forgot_passsword"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/gsign"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="10dp"
-        android:layout_toRightOf="@+id/fp"
-        android:onClick="signUp"
-        android:text="Sign up"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
+        <TextView
+            android:id="@+id/skipsign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:text="Skip Sign In"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:gravity="center"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/sign"
-        android:layout_width="220dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/edpass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/roundstyle"
-        android:backgroundTint="@color/back"
-        android:gravity="center"
-        android:text="Sign In"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
+        <TextView
+            android:id="@+id/signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/gsign"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/fp"
+            android:onClick="signUp"
+            android:text="Sign up"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/gsign"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/sign"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:background="@drawable/roundstyle"
-        android:backgroundTint="@color/back"
-        android:onClick="signIn"
-        android:text="Sign In With Google"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/sign"
+            android:layout_width="220dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/edpass"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="@color/back"
+            android:gravity="center"
+            android:text="Sign In"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
-    <EditText
-        android:id="@+id/edemail"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/t2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/white"
-        android:hint="email"
-        android:inputType="text"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20dp" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/gsign"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/sign"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:background="@drawable/roundstyle"
+            android:backgroundTint="@color/back"
+            android:text="Sign In With Google"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
-    <EditText
-        android:id="@+id/edpass"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edemail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="10dp"
-        android:hint="password"
-        android:inputType="textPassword"
-        android:text=""
-        android:backgroundTint="@color/white"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/white"
-        android:textSize="20dp" />
+        <EditText
+            android:id="@+id/edemail"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/t2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/white"
+            android:hint="email"
+            android:inputType="text"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/white"
+            android:textSize="20dp" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/edpass"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edemail"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:hint="password"
+            android:inputType="textPassword"
+            android:text=""
+            android:backgroundTint="@color/white"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/white"
+            android:textSize="20dp" />
+    </RelativeLayout>
+</FrameLayout>

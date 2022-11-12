@@ -1,20 +1,12 @@
 package com.example.obook.Adapter
 
-import android.content.Intent
-import android.telecom.Call
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.obook.Model.Movie
 import com.example.obook.R
 import com.example.obook.Model.Movies
-import com.example.obook.Model.User
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MovieAdapter(private val movies:List<Movies>):RecyclerView.Adapter<MovieAdapter.MovieViewHolder>(){
@@ -29,10 +21,7 @@ class MovieAdapter(private val movies:List<Movies>):RecyclerView.Adapter<MovieAd
         private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
         fun bindMovie(movie:Movies){
             itemView.movie_title.text = movie.title
-//            itemView.release_date.text = movie.release_date
-//            itemView.vote_count.text = movie.vote_count
             Glide.with(itemView).load(IMAGE_BASE + movie.poster_path).into(itemView.poster)
-
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }

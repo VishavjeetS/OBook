@@ -1,17 +1,40 @@
 package com.example.obook.Model
 
+import android.content.Context
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import androidx.core.net.toUri
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.Room
+import com.example.obook.Room.MovieDatabase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
 class User {
-    private var instance: User? = null
     private var uid: String = ""
     private var name: String = ""
     private var email: String = ""
-    private var favList: ArrayList<Movie> = arrayListOf()
+    private var uri: String = ""
+    private var password: String = ""
 
-    fun getInstance(): User{
-        if(instance == null){
-            instance = User()
-        }
+    companion object{
+        private var favList: ArrayList<Movies> = arrayListOf()
+        private var instance: User? = null
+        fun getInstance(): User{
+            if(instance == null){
+                instance = User()
+            }
         return instance!!
+    }
+    }
+    constructor(){}
+    constructor(name: String, email: String){
+        this.name = name
+        this.email = email
     }
 
     fun getUID(): String{
@@ -20,6 +43,14 @@ class User {
 
     fun setUID(uid: String){
         this.uid = uid
+    }
+
+    fun getUri(): String{
+        return uri
+    }
+
+    fun setUri(uri: String){
+        this.uri = uri
     }
 
     fun getName(): String?{
@@ -38,11 +69,20 @@ class User {
         this.email = email
     }
 
-    fun setFavList(favList: ArrayList<Movie>){
-        this.favList = favList
+    fun getPassword(): String{
+        return password
     }
 
-    fun getFavList(): ArrayList<Movie>{
+    fun setPassword(info: String){
+        this.password = info
+    }
+//
+//    fun addToList(id: String, title: String, img: String, overview: String, date: String, vote: String){
+//        getFavList().add(Movies(id ,title, vote,overview,img, date))
+//        println("List Size: " + getFavList().size)
+//    }
+
+    fun getFavList(): ArrayList<Movies>{
         return favList
     }
 }

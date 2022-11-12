@@ -1,9 +1,6 @@
-package com.example.obook.util
+package com.example.obook.Fragments
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,22 +8,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.obook.Adapter.MovieAdapter
-import com.example.obook.Model.MovieResponse
-import com.example.obook.Model.Movies
 import com.example.obook.R
-import com.example.obook.detailActivity
-import com.example.obook.services.MovieApiInterface
-import com.example.obook.services.MovieApiService
 import kotlinx.android.synthetic.main.fragment_browse.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.util.*
-import kotlin.Comparator
 import kotlin.collections.ArrayList
 
 class BrowseFragment : Fragment() {

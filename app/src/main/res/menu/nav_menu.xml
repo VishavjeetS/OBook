@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/home"
+    <item android:id="@+id/topRated"
         android:title="Top Rated"
-        android:icon="@drawable/ic_baseline_home"/>
-    <item android:id="@+id/favourite"
+        android:icon="@drawable/ic_trending"/>
+    <item android:id="@+id/popular"
         android:title="Popular"
-        android:icon="@drawable/ic_baseline_favorite"/>
-    <item android:id="@+id/settings"
-        android:title="Settings"
-        android:icon="@drawable/ic_baseline_settings"/>
+        android:icon="@drawable/ic_whatshot"/>
+    <item android:id="@+id/favorite"
+        android:title="Favorite"
+        android:icon="@drawable/ic_baseline_favorite" />
 
 </menu>
