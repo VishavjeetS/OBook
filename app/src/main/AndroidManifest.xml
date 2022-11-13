@@ -34,5 +34,10 @@
             android:name=".DetailActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
+    <queries>
+        <intent>
+            <data  android:scheme="https" android:host="youtube.com" />
+        </intent>
+    </queries>
 
 </manifest>

@@ -1,7 +1,5 @@
 package com.example.obook.services
 
-import com.example.obook.Model.Movies
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

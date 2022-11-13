@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull
 
 @Parcelize
 @Entity(tableName = "movies")
-data class Movies(
+class Movies(
     @PrimaryKey
     @SerializedName("id")
     val id : String,
@@ -23,7 +23,7 @@ data class Movies(
     @SerializedName("poster_path")
     val poster_path:String?,
     @SerializedName("release_date")
-    val release_date:String
+    val release_date:String,
 ):Parcelable{
     constructor() : this("", "", "","","", "")
 }

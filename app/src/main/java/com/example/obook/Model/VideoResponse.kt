@@ -1,14 +1,13 @@
 package com.example.obook.Model
 
 import android.os.Parcelable
-import com.example.obook.Model.Movies
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class MovieResponse(
+class VideoResponse (
     @SerializedName("results")
-    val movies: List<Movies>,
-):Parcelable{
-    constructor() : this(mutableListOf())
-}
+    val videos: List<Videos>
+    ): Parcelable{
+        constructor(): this(mutableListOf())
+    }

@@ -105,31 +105,21 @@
                 android:textAllCaps="false"
                 android:textSize="17sp" />
 
-            <LinearLayout
-                android:id="@+id/added"
-                android:visibility="gone"
+            <TextView
+                android:id="@+id/site"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="5dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/roundstyle">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Added"
-                    android:textSize="20sp"
-                    android:visibility="visible"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/white"/>
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_check"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginStart="10dp"
-                    app:tint="@color/white" />
-            </LinearLayout>
+                android:visibility="visible"
+                android:text="Site"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="27sp" />
+
+            <com.google.android.youtube.player.YouTubePlayerView
+                android:id="@+id/yTFrag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

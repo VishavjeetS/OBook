@@ -4,6 +4,7 @@ class Constant {
     private var USERSIGNIN: Boolean = false
     private var GSIGN: Boolean = false
     private var providerId: String = ""
+    private var YTAPI: String = ""
 
     companion object{
         private var instance: Constant? = null
@@ -36,5 +37,9 @@ class Constant {
 
     fun setProviderId(info: String){
         this.providerId = info
+    }
+
+    fun getYTAPI(): String{
+        return YTAPI
     }
 }
