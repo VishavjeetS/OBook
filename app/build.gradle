@@ -74,4 +74,6 @@ dependencies {
     implementation "androidx.activity:activity-ktx:$activityVersion"
 
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 }

@@ -50,7 +50,6 @@ class NameChange : Fragment() {
                         userMap["name"] = name
                         userMap["email"] = userObj.getEmail().toString()
                         userMap["uid"] = userObj.getUID()
-                        userMap["favourite"] = userObj.getFavList()
                         if(snapshot.exists()){
                             database.updateChildren(userMap).addOnSuccessListener {
                                 Toast.makeText(requireContext(), "Name Updated + $userMap + ${userObj.getEmail()}", Toast.LENGTH_SHORT).show()

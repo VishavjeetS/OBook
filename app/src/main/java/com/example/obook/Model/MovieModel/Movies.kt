@@ -1,4 +1,4 @@
-package com.example.obook.Model
+package com.example.obook.Model.MovieModel
 
 import android.os.Parcelable
 import androidx.annotation.NonNull

@@ -13,10 +13,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.example.obook.Adapter.MovieAdapter
-import com.example.obook.Model.User
 import com.example.obook.R
 import com.example.obook.DetailActivity
-import com.example.obook.Model.Movies
+import com.example.obook.Model.MovieModel.Movies
 import com.example.obook.Room.MovieDatabase
 import com.example.obook.util.Constant
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -56,7 +55,7 @@ class Favourite : Fragment() {
         recyclerView.setHasFixedSize(true)
         database.movieDAO().getMovies().observe(requireActivity()) {
             Log.d("Room", it.toString())
-            val adapter = MovieAdapter(it as ArrayList<Movies>)
+            val adapter = MovieAdapter(it as MutableList<Movies>)
             recyclerView.adapter = adapter
             adapter.notifyDataSetChanged()
             adapter.setOnItemClickListener(object : MovieAdapter.onItemClickListener {

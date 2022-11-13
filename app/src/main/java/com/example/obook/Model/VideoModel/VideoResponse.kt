@@ -1,4 +1,4 @@
-package com.example.obook.Model
+package com.example.obook.Model.VideoModel
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName

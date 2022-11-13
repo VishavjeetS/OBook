@@ -46,8 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/nav_bar"
-            android:paddingStart="7dp"
             android:layout_below="@+id/actionBarLL"
+            android:paddingStart="12dp"
             android:background="@color/dark_gray" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

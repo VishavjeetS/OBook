@@ -1,18 +1,6 @@
 package com.example.obook.Model
 
-import android.content.Context
-import android.util.Log
-import android.view.View
-import android.widget.Toast
-import androidx.core.net.toUri
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Room
-import com.example.obook.Room.MovieDatabase
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.obook.Model.MovieModel.Movies
 
 class User {
     private var uid: String = ""
@@ -76,11 +64,11 @@ class User {
     fun setPassword(info: String){
         this.password = info
     }
-//
-//    fun addToList(id: String, title: String, img: String, overview: String, date: String, vote: String){
-//        getFavList().add(Movies(id ,title, vote,overview,img, date))
-//        println("List Size: " + getFavList().size)
-//    }
+
+    fun addToList(movie: Movies){
+        getFavList().add(movie)
+        println("List Size: " + getFavList().size)
+    }
 
     fun getFavList(): ArrayList<Movies>{
         return favList

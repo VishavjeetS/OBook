@@ -1,7 +1,6 @@
-package com.example.obook.Model
+package com.example.obook.Model.MovieModel
 
 import android.os.Parcelable
-import com.example.obook.Model.Movies
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 

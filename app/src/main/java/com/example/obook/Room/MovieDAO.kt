@@ -2,12 +2,12 @@ package com.example.obook.Room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.obook.Model.Movies
+import com.example.obook.Model.MovieModel.Movies
 
 
 @Dao
 interface MovieDAO {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovie(movie: Movies)
 
     @Update
