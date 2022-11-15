@@ -6,35 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@android:style/Theme.NoTitleBar"
-    android:background="@drawable/background"
+    android:background="@color/black"
     android:gravity="center"
     tools:context=".Welcome">
 
-    <Button
-        android:id="@+id/button_reg_welcome"
+    <ImageView
+        android:id="@+id/imgView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:layout_marginTop="40dp"
-        android:onClick="register"
-        android:textColor="@color/white"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:backgroundTint="@color/colorPrimaryDark"/>
-
-    <Button
-        android:id="@+id/button_login_welcome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:onClick="Login"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/colorPrimaryDark"/>
-
-
-
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
 </LinearLayout>

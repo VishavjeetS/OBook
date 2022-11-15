@@ -26,7 +26,7 @@
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/gradient_background.xml" value="0.182" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/ic_heart.xml" value="0.182" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/movie_item_bg.xml" value="0.182" />
-        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_detail.xml" value="0.25677083333333334" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_detail.xml" value="0.264" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_main.xml" value="0.20659340659340658" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_main2.xml" value="0.25677083333333334" />
@@ -35,6 +35,7 @@
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/activity_welcome.xml" value="0.25" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/content_main.xml" value="0.25677083333333334" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_anime.xml" value="0.2609375" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_book.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_browse.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/fragment_detail.xml" value="0.25677083333333334" />
@@ -49,6 +50,7 @@
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/navigation_header.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/popular.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/toprated.xml" value="0.25677083333333334" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/layout/user_item.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/menu/menu_items.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/menu/nav_menu.xml" value="0.25677083333333334" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/menu/navigation_drawer.xml" value="0.24635416666666668" />

@@ -59,6 +59,7 @@ class Popular:Fragment(), SearchView.OnQueryTextListener {
                     intent.putExtra("overview", movies[position].overview.toString())
                     intent.putExtra("date", movies[position].release_date)
                     intent.putExtra("popularity", movies[position].vote_count.toString())
+                    intent.putExtra("voteAvg", movies[position].vote_average.toString())
                     startActivity(intent)
                 }
             })
@@ -82,6 +83,7 @@ class Popular:Fragment(), SearchView.OnQueryTextListener {
                         intent.putExtra("overview", movies[position].overview.toString())
                         intent.putExtra("date", movies[position].release_date)
                         intent.putExtra("popularity", movies[position].vote_count.toString())
+                        intent.putExtra("voteAvg", movies[position].vote_average.toString())
                         startActivity(intent)
                     }
                 })
@@ -106,6 +108,7 @@ class Popular:Fragment(), SearchView.OnQueryTextListener {
                             intent.putExtra("overview", movies[position].overview.toString())
                             intent.putExtra("date", movies[position].release_date)
                             intent.putExtra("popularity", movies[position].vote_count.toString())
+                            intent.putExtra("voteAvg", movies[position].vote_average.toString())
                             startActivity(intent)
                         }
                     })

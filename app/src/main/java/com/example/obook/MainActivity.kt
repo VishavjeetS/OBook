@@ -11,7 +11,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
-import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -22,16 +21,16 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.obook.Authentication.Login
-import com.example.obook.Fragments.Favourite
-import com.example.obook.Fragments.Popular
-import com.example.obook.Fragments.SettingsFragment
-import com.example.obook.Fragments.TopRated
+import com.example.obook.Fragments.*
 import com.example.obook.Model.User
-import com.example.obook.util.*
+import com.example.obook.util.Constant
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -85,6 +84,9 @@ class MainActivity : AppCompatActivity() {
                         startActivity(Intent(this, Login::class.java))
                         Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show()
                         this.finish()
+                    }
+                    R.id.anime -> {
+                        makeCurrentScreen(AnimeFragment())
                     }
                 }
                 true
@@ -166,13 +168,6 @@ class MainActivity : AppCompatActivity() {
         replace(R.id.wrapper_frame, fragment)
         commit()
     }
-
-    fun refresh() {
-        val fragment = Favourite()
-        val fm = supportFragmentManager
-        val ft = fm.beginTransaction()
-        ft.replace(R.id.wrapper_frame, fragment).commit()
-    }
     private fun hideItem() {
         val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
         val nav_Menu: Menu = navigationView.getMenu()
@@ -183,7 +178,10 @@ class MainActivity : AppCompatActivity() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            val a = Intent(Intent.ACTION_MAIN)
+            a.addCategory(Intent.CATEGORY_HOME)
+            a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(a)
         }
     }
 
@@ -218,5 +216,4 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
     }
-
 }

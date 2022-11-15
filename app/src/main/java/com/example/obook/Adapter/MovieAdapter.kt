@@ -1,5 +1,6 @@
 package com.example.obook.Adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -70,6 +71,7 @@ open class MovieAdapter(private var movies:MutableList<Movies>):RecyclerView.Ada
                 }
             }
 
+            @SuppressLint("NotifyDataSetChanged")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 // no need to use "results" filtered list provided by this method.
                 values = results?.values as ArrayList<Movies>
