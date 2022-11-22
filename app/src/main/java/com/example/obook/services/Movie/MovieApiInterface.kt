@@ -1,4 +1,4 @@
-package com.example.obook.services
+package com.example.obook.services.Movie
 
 import com.example.obook.Model.CastModel.CastResponse
 import com.example.obook.Model.KeywordModel.KeywordResponse
@@ -23,7 +23,7 @@ interface MovieApiInterface {
     fun getRecommendation(@Path("movie_id") int: Int): Call<MovieResponse>
 
     @GET("search/movie?api_key=8f7e8262951851e9cd40e68b53f7df38")
-    fun searchMovie(): Call<MovieResponse>
+    fun searchMovie(@Query("query") movie: String, @Query("page") page: Int): Call<MovieResponse>
 
     @GET("movie/{movie_id}/similar?api_key=8f7e8262951851e9cd40e68b53f7df38")
     fun getSimilar(@Path("movie_id") int:Int, @Query("page") page:Int): Call<MovieResponse>

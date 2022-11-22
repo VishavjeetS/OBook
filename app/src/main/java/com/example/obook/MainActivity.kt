@@ -2,8 +2,10 @@ package com.example.obook
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -13,18 +15,31 @@ import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.obook.Adapter.MovieAdapter
+import com.example.obook.Adapter.TvAdapter
 import com.example.obook.Authentication.Login
 import com.example.obook.Fragments.*
-import com.example.obook.Model.User
+import com.example.obook.Model.MovieModel.MovieResponse
+import com.example.obook.Model.MovieModel.Movies
+import com.example.obook.Model.TvModel.TV
+import com.example.obook.Model.TvModel.TvResponse
+import com.example.obook.Model.UserModel.User
+import com.example.obook.services.Movie.MovieApiInterface
+import com.example.obook.services.Movie.MovieApiService
+import com.example.obook.services.TVShows.TvApiInterface
+import com.example.obook.services.TVShows.TvApiService
 import com.example.obook.util.Constant
-import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -32,15 +47,29 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
+import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+    private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500"
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var drawer: DrawerLayout
+    lateinit var searchView: SearchView
     private var obj = Constant.getInstance()
     private var userSign = false
     private var gSign = false
+    var page = 1
+    lateinit var searchAdapter: MovieAdapter
+    lateinit var searchRV: RecyclerView
+    private lateinit var searchInfo: ArrayList<Movies>
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,6 +94,8 @@ class MainActivity : AppCompatActivity() {
 
         println("True Value: $gSign")
         println("True Value: " + obj.getGSign())
+        searchRV = findViewById(R.id.searchRV)
+        searchRV.setHasFixedSize(true)
 
         drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         toggle = ActionBarDrawerToggle(this, drawer, R.string.open, R.string.close)
@@ -76,25 +107,33 @@ class MainActivity : AppCompatActivity() {
         val email1 = header.findViewById<TextView>(R.id.email)
         val img = header.findViewById<ImageView>(R.id.ProfImg)
 
-        if(!obj.getInfo()){
-            nav_view.setNavigationItemSelectedListener {
-                when(it.itemId){
-                    R.id.logout -> {
-                        FirebaseAuth.getInstance().signOut()
-                        startActivity(Intent(this, Login::class.java))
-                        Toast.makeText(this, "Log out", Toast.LENGTH_SHORT).show()
-                        this.finish()
-                    }
-                    R.id.anime -> {
-                        makeCurrentScreen(AnimeFragment())
-                    }
+        val constObj = Constant.getInstance()
+        nav_view.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.movie -> {
+                    constObj.setTv(false)
+                    constObj.setScreen("Movie")
+                    makeCurrentScreen(Popular())
                 }
-                true
+                R.id.anime -> {
+//                    constObj.setScreen("Anime")
+                    makeCurrentScreen(AnimeFragment())
+                }
+                R.id.tv -> {
+                    constObj.setTv(true)
+                    constObj.setScreen("TV")
+                    makeCurrentScreen(Popular())
+                }
+                else -> {
+                    constObj.setScreen("Movie")
+                    makeCurrentScreen(Popular())
+                }
             }
+            true
         }
-        else{
-            hideItem()
-        }
+
+        constObj.setScreen("Movie")
+        makeCurrentScreen(Popular())
 
         val FUser = Firebase.auth.currentUser
         FUser?.let {
@@ -154,11 +193,18 @@ class MainActivity : AppCompatActivity() {
         val favourite = Favourite()
         val topRated = TopRated()
         makeCurrentScreen(popular)
+
         nav_bar.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.popular -> makeCurrentScreen(popular)
-                R.id.topRated -> makeCurrentScreen(topRated)
-                R.id.favorite -> makeCurrentScreen(favourite)
+                R.id.popular -> {
+                    makeCurrentScreen(popular)
+                }
+                R.id.topRated -> {
+                    makeCurrentScreen(topRated)
+                }
+                R.id.favorite -> {
+                    makeCurrentScreen(favourite)
+                }
             }
             true
         }
@@ -168,16 +214,12 @@ class MainActivity : AppCompatActivity() {
         replace(R.id.wrapper_frame, fragment)
         commit()
     }
-    private fun hideItem() {
-        val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
-        val nav_Menu: Menu = navigationView.getMenu()
-        nav_Menu.findItem(R.id.logout).isVisible = false
-    }
 
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
-        } else {
+        }
+        else {
             val a = Intent(Intent.ACTION_MAIN)
             a.addCategory(Intent.CATEGORY_HOME)
             a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -188,11 +230,109 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_items, menu)
+        searchView = menu.findItem(R.id.Search)?.actionView as SearchView
+        searchView.setOnQueryTextListener(this)
         if(obj.getInfo()){
             val register: MenuItem? = menu.findItem(R.id.logout_item)
             register?.isVisible = false
         }
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
         return true
+    }
+
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        if(newText != null){
+            if(newText.isNotEmpty()){
+                searchMovies(newText)
+            }
+            else{
+                searchRV.visibility = View.GONE
+            }
+        }
+        return true
+    }
+
+    private fun searchMovies(movie: String) {
+        when(Constant.getInstance().getScreen()){
+            "Movie" -> {
+                MovieApiService.getInstance().create(MovieApiInterface::class.java)
+                    .searchMovie(movie, page).enqueue(object :Callback<MovieResponse>{
+                        override fun onResponse(
+                            call: Call<MovieResponse>,
+                            response: Response<MovieResponse>,
+                        ) {
+                            val movies = response.body()!!.movies
+                            Log.d("Search", movies.toString())
+                            searchRV.visibility = View.VISIBLE
+                            searchAdapter = MovieAdapter(movies as MutableList<Movies>)
+                            searchRV.adapter = AlphaInAnimationAdapter(searchAdapter)
+                            searchRV.layoutManager = GridLayoutManager(applicationContext, 2)
+                            searchAdapter.setOnItemClickListener(object: MovieAdapter.onItemClickListener{
+                                override fun onItemClick(position: Int) {
+                                    val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                                    val image = IMAGE_BASE + movies[position].poster_path.toString()
+                                    Log.d("ImageUri", image)
+                                    intent.putExtra("id", movies[position].id)
+                                    intent.putExtra("image", image)
+                                    intent.putExtra("title", movies[position].title.toString())
+                                    intent.putExtra("overview", movies[position].overview.toString())
+                                    intent.putExtra("date", movies[position].release_date)
+                                    intent.putExtra("popularity", movies[position].vote_count.toString())
+                                    intent.putExtra("voteAvg", movies[position].vote_average.toString())
+                                    startActivity(intent)
+                                }
+
+                            })
+                        }
+
+                        override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
+                            TODO("Not yet implemented")
+                        }
+
+                    })
+            }
+            "TV"  -> {
+                TvApiService.getInstance().create(TvApiInterface::class.java)
+                    .getTvSearch(movie).enqueue(object :Callback<TvResponse>{
+                        override fun onResponse(
+                            call: Call<TvResponse>,
+                            response: Response<TvResponse>,
+                        ) {
+                            val movies = response.body()!!.result
+                            Log.d("Search", movies.toString())
+                            searchRV.visibility = View.VISIBLE
+                            val searchAdapter = TvAdapter(movies as MutableList<TV>)
+                            searchRV.adapter = AlphaInAnimationAdapter(searchAdapter)
+                            searchRV.layoutManager = GridLayoutManager(applicationContext, 2)
+                            searchAdapter.setOnItemClickListener(object: TvAdapter.onItemClickListener{
+                                override fun onItemClick(position: Int) {
+                                    val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                                    val image = IMAGE_BASE + movies[position].poster_path.toString()
+                                    Log.d("ImageUri", image)
+                                    intent.putExtra("id", movies[position].id)
+                                    intent.putExtra("image", image)
+                                    intent.putExtra("title", movies[position].title.toString())
+                                    intent.putExtra("overview", movies[position].overview.toString())
+                                    intent.putExtra("date", movies[position].release_date)
+                                    intent.putExtra("popularity", movies[position].vote_count.toString())
+                                    intent.putExtra("voteAvg", movies[position].vote_average.toString())
+                                    startActivity(intent)
+                                }
+
+                            })
+                        }
+
+                        override fun onFailure(call: Call<TvResponse>, t: Throwable) {
+                            TODO("Not yet implemented")
+                        }
+
+                    })
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

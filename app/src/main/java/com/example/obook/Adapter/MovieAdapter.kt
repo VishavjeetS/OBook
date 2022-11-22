@@ -24,10 +24,6 @@ open class MovieAdapter(private var movies:MutableList<Movies>):RecyclerView.Ada
     fun setOnItemClickListener(listener: onItemClickListener){
         mListener = listener
     }
-    fun updateList(list: List<Movies>) {
-        movies = list as MutableList<Movies>
-        notifyDataSetChanged()
-    }
     class MovieViewHolder(itemView:View, private var listener: onItemClickListener):RecyclerView.ViewHolder(itemView){
         private val IMAGE_BASE = "https://image.tmdb.org/t/p/w500/"
         var title = ""
@@ -35,6 +31,8 @@ open class MovieAdapter(private var movies:MutableList<Movies>):RecyclerView.Ada
             itemView.movie_title.text = movie.title
             title = movie.title!!
             Glide.with(itemView).load(IMAGE_BASE + movie.poster_path).into(itemView.poster)
+            itemView.alpha = 0F;
+            itemView.animate().alpha(1F).start();
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }

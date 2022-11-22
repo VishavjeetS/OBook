@@ -1,4 +1,4 @@
-package com.example.obook.services
+package com.example.obook.services.Anime
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

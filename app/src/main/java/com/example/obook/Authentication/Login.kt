@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.obook.util.ForgotPassword
 import com.example.obook.MainActivity
-import com.example.obook.Model.User
+import com.example.obook.Model.UserModel.User
 import com.example.obook.R
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn

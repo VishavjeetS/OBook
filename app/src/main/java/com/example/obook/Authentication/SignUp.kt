@@ -8,7 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import com.example.obook.MainActivity
-import com.example.obook.Model.User
+import com.example.obook.Model.UserModel.User
 import com.example.obook.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference

@@ -1,4 +1,4 @@
-package com.example.obook.Room
+package com.example.obook.Room.MovieModel
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

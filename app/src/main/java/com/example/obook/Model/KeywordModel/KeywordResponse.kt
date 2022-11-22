@@ -7,7 +7,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class KeywordResponse(
     @SerializedName("keywords")
-    val keywords: List<Keywords>
+    val keywords: List<Keywords>,
+    @SerializedName("results")
+    val keywordsResult: List<Keywords>
 ):Parcelable{
-    constructor(): this(mutableListOf())
+    constructor(): this(mutableListOf(), mutableListOf())
 }

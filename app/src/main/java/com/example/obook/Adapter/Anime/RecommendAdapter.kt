@@ -1,16 +1,16 @@
-package com.example.obook.Adapter
+package com.example.obook.Adapter.Anime
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.obook.Model.Anime
-//import com.example.obook.Model.Images
+import com.example.obook.Adapter.MovieAdapter
+import com.example.obook.Model.AnimeModel.Recommendation.Data
 import com.example.obook.R
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-class AnimeAdapter(private val animeList: List<Anime>): RecyclerView.Adapter<AnimeAdapter.AnimeViewHolder>() {
+class RecommendAdapter(private val animeList: List<Data>): RecyclerView.Adapter<RecommendAdapter.AnimeViewHolder>() {
     lateinit var mListener: MovieAdapter.onItemClickListener
     interface onItemClickListener : MovieAdapter.onItemClickListener {
         override fun onItemClick(position: Int);
@@ -19,10 +19,11 @@ class AnimeAdapter(private val animeList: List<Anime>): RecyclerView.Adapter<Ani
         mListener = listener
     }
     class AnimeViewHolder(itemView: View, private var listener: MovieAdapter.onItemClickListener): RecyclerView.ViewHolder(itemView) {
-        private val IMAGE_BASE = "https://api.jikan.moe/v4/"
-        fun bindMovie(anime: Anime){
-            itemView.movie_title.text = anime.title
-//            Glide.with(itemView).load(IMAGE_BASE + Images().getJpg()).into(itemView.poster)
+        fun bindMovie(anime: Data){
+            itemView.movie_title.text = anime.entry.title
+            val image = anime.entry.images.jpg.imageUrl
+            Glide.with(itemView).load(image).into(itemView.poster)
+//            Log.d("Image", anime.images.jpg.imageUrl)
             itemView.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/logout"
-        android:title="Logout" />
+        android:id="@+id/movie"
+        android:title="Movies" />
+
+    <item android:title="TV Shows"
+        android:id="@+id/tv"/>
+
     <item
         android:id="@+id/anime"
         android:title="Anime" />

@@ -5,6 +5,8 @@ class Constant {
     private var GSIGN: Boolean = false
     private var providerId: String = ""
     private var YTAPI: String = ""
+    private var isTv: Boolean = false
+    private var SCREEN: String = ""
 
     companion object{
         private var instance: Constant? = null
@@ -14,6 +16,18 @@ class Constant {
             }
             return instance!!
         }
+    }
+    fun setScreen(screen: String){
+        this.SCREEN = screen
+    }
+    fun getScreen(): String{
+        return SCREEN
+    }
+    fun setTv(info: Boolean) {
+        this.isTv = info
+    }
+    fun getTv(): Boolean{
+        return isTv
     }
 
     fun setInfo(info: Boolean){

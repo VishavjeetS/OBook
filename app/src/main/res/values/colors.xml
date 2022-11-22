@@ -15,4 +15,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="pale_black">#101010</color>
     <color name="dark_gray">#202020</color>
+    <color name="purple">#8E24AA</color>
 </resources>
