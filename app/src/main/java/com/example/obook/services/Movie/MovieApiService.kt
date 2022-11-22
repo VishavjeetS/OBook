@@ -1,11 +1,5 @@
-package com.example.obook.services
+package com.example.obook.services.Movie
 
-import android.util.Log
-import com.example.obook.Model.MovieModel.MovieResponse
-import com.example.obook.Model.MovieModel.Movies
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

@@ -1,4 +1,4 @@
-package com.example.obook.Model
+package com.example.obook.Model.UserModel
 
 import com.example.obook.Model.MovieModel.Movies
 
@@ -12,7 +12,7 @@ class User {
     companion object{
         private var favList: ArrayList<Movies> = arrayListOf()
         private var instance: User? = null
-        fun getInstance(): User{
+        fun getInstance(): User {
             if(instance == null){
                 instance = User()
             }

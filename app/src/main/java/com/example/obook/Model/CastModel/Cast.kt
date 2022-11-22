@@ -13,7 +13,7 @@ data class Cast (
     @SerializedName("name")
     val name: String,
     @SerializedName("profile_path")
-    val image: String,
+    val image: String?,
     @SerializedName("credit_id")
     val credit_id: String,
     @SerializedName("character")

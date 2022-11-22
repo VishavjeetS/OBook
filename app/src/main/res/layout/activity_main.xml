@@ -36,10 +36,18 @@
                         android:layout_marginStart="25dp"
                         android:text="Hey, User"
                         android:textColor="@color/white" />
-
                 </androidx.appcompat.widget.Toolbar>
             </com.google.android.material.appbar.AppBarLayout>
         </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searchRV"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="12dp"
+            android:layout_above="@id/nav_bar"
+            android:background="@color/dark_gray"
+            tools:ignore="RtlSymmetry" />
 
         <FrameLayout
             android:id="@+id/wrapper_frame"

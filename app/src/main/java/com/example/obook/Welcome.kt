@@ -25,7 +25,7 @@ class Welcome : AppCompatActivity(){
             val intent = Intent(this, Login::class.java)
             startActivity(intent)
             this.finish()
-        }, 5000)
+        }, 3000)
 
         val img = findViewById<ImageView>(R.id.imgView)
         val glide = DrawableImageViewTarget(img)

@@ -79,4 +79,6 @@ dependencies {
     implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:11.1.0'
 
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.23'
+
+    implementation 'jp.wasabeef:recyclerview-animators:2.0.0'
 }
