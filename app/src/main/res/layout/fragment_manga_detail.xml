@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    android:backgroundTint="@color/black"
+    app:cardCornerRadius="20dp"
+    android:elevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/black">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volumes"
+            android:gravity="center"
+            android:id="@+id/volume_text_view"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/volume_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_below="@id/volume_text_view"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/fragment_container_manga"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
