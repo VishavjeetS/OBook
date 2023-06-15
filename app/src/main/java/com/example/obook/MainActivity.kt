@@ -138,13 +138,13 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 R.id.movie -> {
                     constObj.setTv(false)
                     constObj.setScreen("Movie")
-//                    makeCurrentScreen(Popular())
+                    makeCurrentScreen(Popular())
                     nav_bar.visibility = View.VISIBLE
                     drawer.close()
                 }
                 R.id.anime -> {
                     constObj.setScreen("Anime")
-//                    makeCurrentScreen(Popular())
+                    makeCurrentScreen(Popular())
                     nav_bar.visibility = View.VISIBLE
                     drawer.close()
                 }
@@ -157,7 +157,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 }
                 else -> {
                     constObj.setScreen("Manga")
-//                    makeCurrentScreen(Popular())
+                    makeCurrentScreen(Popular())
                     nav_bar.visibility = View.GONE
                     drawer.close()
                 }
