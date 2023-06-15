@@ -1,5 +1,6 @@
 package com.example.obook.util
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,11 +10,11 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.example.obook.Model.UserModel.User
+import com.example.obook.MainActivity
+import com.example.obook.model.UserModel.User
 import com.example.obook.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -31,6 +32,7 @@ class NameChange : Fragment() {
         database = Firebase.database.reference
         val userObj = User.getInstance()
         val userId = userObj.getUID()
+        val constant = Constant.getInstance()
 
         println("userName: " + userId)
 
@@ -79,17 +81,29 @@ class NameChange : Fragment() {
             else{
                 val user = Firebase.auth.currentUser
                 val name = newName.text.toString()
-                val profileUpdates = userProfileChangeRequest {
-                    displayName = name
-                }
-                user!!.updateProfile(profileUpdates)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            userObj.setName(name)
-                            view.visibility = View.GONE
-                            Log.d("GName", "${userObj.getName()} ${user.displayName}")
-                        }
-                    }
+                userObj.setName(name)
+                view.visibility = View.GONE
+                constant.setGSIGN_NAME(true)
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                intent.putExtra("name", name)
+                startActivity(intent)
+                requireActivity().finish()
+//                val profileUpdates = userProfileChangeRequest {
+//                    displayName = name
+//                }
+//                user!!.updateProfile(profileUpdates)
+//                    .addOnCompleteListener { task ->
+//                        if (task.isSuccessful) {
+//                            userObj.setName(name)
+//                            view.visibility = View.GONE
+//                            constant.setGSIGN_NAME(true)
+//                            val intent = Intent(requireContext(), MainActivity::class.java)
+//                            intent.putExtra("name", name)
+//                            startActivity(intent)
+//                            Log.d("GName", "${userObj.getName()} ${user.displayName}")
+//                            requireActivity().finish()
+//                        }
+//                    }
             }
         }
         return view

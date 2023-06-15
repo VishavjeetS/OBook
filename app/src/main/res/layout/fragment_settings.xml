@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/dark_gray"
-    tools:context=".Fragments.SettingsFragment">
+    tools:context=".fragments.SettingsFragment">
 
     <ListView
         android:id="@+id/list"

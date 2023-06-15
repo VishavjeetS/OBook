@@ -10,4 +10,8 @@
     <item
         android:id="@+id/anime"
         android:title="Anime" />
+
+    <item
+        android:id="@+id/manga"
+        android:title="Manga" />
 </menu>

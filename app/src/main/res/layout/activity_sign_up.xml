@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black"
     android:orientation="vertical"
-    tools:context=".Authentication.SignUp">
+    tools:context=".authentication.SignUp">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarLayout"

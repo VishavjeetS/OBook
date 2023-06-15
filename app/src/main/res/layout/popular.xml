@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:gravity="center"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -13,37 +14,59 @@
         tools:ignore="UselessParent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/popular_genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="horizontal"/>
+
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/movie_recycler"
             android:layout_width="match_parent"
+            android:layout_below="@id/popular_genre"
             android:layout_height="wrap_content"
             tools:listitem="@layout/movie_item" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/nextBtn"
+        <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            app:backgroundTint="#8E24AA"
-            app:tint="@color/white"
-            android:src="@drawable/ic_arrow_forward"
-            android:layout_margin="20dp"
-            android:text="Next"/>
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_alignParentBottom="true">
+
+        </LinearLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/backBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginEnd="240dp"
+            android:layout_marginBottom="20dp"
+            android:src="@drawable/ic_arrow_back"
+            app:backgroundTint="#8E24AA"
+            app:tint="@color/white"
+            android:contentDescription="Pagination Previous" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/nextBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_arrow_back"
-            android:text="Next"
+            android:src="@drawable/ic_arrow_forward"
             app:backgroundTint="#8E24AA"
-            app:tint="@color/white" />
+            app:tint="@color/white"
+            android:contentDescription="Pagination Next" />
+
+
     </RelativeLayout>
 
 </LinearLayout>

@@ -5,21 +5,12 @@
     android:layout_height="match_parent"
     android:background="@color/dark_gray"
     android:orientation="vertical"
-    tools:context=".Fragments.AnimeFragment">
+    tools:context=".fragments.AnimeFragment">
 
-    <TextView
+    <com.google.android.exoplayer2.ui.PlayerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Coming Soon!"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:layout_gravity="center_vertical"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/animeRecycle"/>
+        android:layout_height="210dp"
+        android:id="@+id/playerView"/>
 
 
 </LinearLayout>

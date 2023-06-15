@@ -1,8 +1,8 @@
 package com.example.obook
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
@@ -20,26 +20,39 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.cardview.widget.CardView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.obook.Adapter.MovieAdapter
-import com.example.obook.Adapter.TvAdapter
-import com.example.obook.Authentication.Login
-import com.example.obook.Fragments.*
-import com.example.obook.Model.MovieModel.MovieResponse
-import com.example.obook.Model.MovieModel.Movies
-import com.example.obook.Model.TvModel.TV
-import com.example.obook.Model.TvModel.TvResponse
-import com.example.obook.Model.UserModel.User
-import com.example.obook.services.Movie.MovieApiInterface
-import com.example.obook.services.Movie.MovieApiService
-import com.example.obook.services.TVShows.TvApiInterface
-import com.example.obook.services.TVShows.TvApiService
+import com.example.obook.adapter.tmdb.MovieAdapter
+import com.example.obook.adapter.tmdb.TvAdapter
+import com.example.obook.adapter.anime.AnimeAdapter
+import com.example.obook.authentication.Login
+import com.example.obook.fragments.*
+import com.example.obook.model.MovieModel.MovieResponse
+import com.example.obook.model.MovieModel.Responses.Movies
+import com.example.obook.model.TvModel.Responses.TV
+import com.example.obook.model.TvModel.TvResponse
+import com.example.obook.model.UserModel.User
+import com.example.obook.model.animeModel.Manga.mangadex.response.mangaResponse.MangaResponse
+import com.example.obook.model.animeModel.anime.topAnime.Anime
+import com.example.obook.services.manga.MangaApiInterface
+import com.example.obook.services.manga.MangaApiService
+import com.example.obook.services.yts.YtsResponse
 import com.example.obook.util.Constant
+import com.google.android.exoplayer2.MediaItem
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory
+import com.google.android.exoplayer2.source.MediaSource
+import com.google.android.exoplayer2.source.ProgressiveMediaSource
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.util.Util
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -47,14 +60,9 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.ktx.Firebase
-import jp.wasabeef.recyclerview.animators.adapters.AlphaInAnimationAdapter
+import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.*
-import kotlin.Comparator
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
@@ -68,12 +76,26 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     var page = 1
     lateinit var searchAdapter: MovieAdapter
     lateinit var searchRV: RecyclerView
-    private lateinit var searchInfo: ArrayList<Movies>
+    private lateinit var googleSignInOptions: GoogleSignInOptions
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var mangaRv: RecyclerView
+    private val REQUEST_WRITE_PERMISSION = 786
+    private val REQUEST_READ_PERMISSION = 787
+
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        requestPermission()
+
+        mangaRv = findViewById(R.id.mangaRV)
+        mangaRv.layoutManager = LinearLayoutManager(this)
+        mangaRv.setHasFixedSize(true)
+        //getChapters()
+
+        //watchMovie()
 
         val toolbar: Toolbar = findViewById(R.id.toolbar_main)
         setSupportActionBar(toolbar)
@@ -91,7 +113,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         obj.setInfo(userSign)
         obj.setGSign(gSign)
 
-
         println("True Value: $gSign")
         println("True Value: " + obj.getGSign())
         searchRV = findViewById(R.id.searchRV)
@@ -108,43 +129,81 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         val img = header.findViewById<ImageView>(R.id.ProfImg)
 
         val constObj = Constant.getInstance()
+        if (constObj.getGSIGN_NAME()) {
+            val name = intent.getStringExtra("name")
+            toolbarText.text = "Hey, $name"
+        }
         nav_view.setNavigationItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.movie -> {
                     constObj.setTv(false)
                     constObj.setScreen("Movie")
-                    makeCurrentScreen(Popular())
+//                    makeCurrentScreen(Popular())
+                    nav_bar.visibility = View.VISIBLE
+                    drawer.close()
                 }
                 R.id.anime -> {
-//                    constObj.setScreen("Anime")
-                    makeCurrentScreen(AnimeFragment())
+                    constObj.setScreen("Anime")
+//                    makeCurrentScreen(Popular())
+                    nav_bar.visibility = View.VISIBLE
+                    drawer.close()
                 }
                 R.id.tv -> {
                     constObj.setTv(true)
                     constObj.setScreen("TV")
-                    makeCurrentScreen(Popular())
+//                    makeCurrentScreen(Popular())
+                    nav_bar.visibility = View.VISIBLE
+                    drawer.close()
                 }
                 else -> {
-                    constObj.setScreen("Movie")
-                    makeCurrentScreen(Popular())
+                    constObj.setScreen("Manga")
+//                    makeCurrentScreen(Popular())
+                    nav_bar.visibility = View.GONE
+                    drawer.close()
                 }
             }
             true
         }
 
-        constObj.setScreen("Movie")
-        makeCurrentScreen(Popular())
+        when (constObj.getScreen()) {
+            "Movie" -> {
+                constObj.setScreen("Movie")
+                makeCurrentScreen(Popular())
+                nav_bar.visibility = View.VISIBLE
+            }
+            "TV" -> {
+                constObj.setScreen("TV")
+                makeCurrentScreen(Popular())
+                nav_bar.visibility = View.VISIBLE
+            }
+            "Anime" -> {
+                constObj.setScreen("Anime")
+                makeCurrentScreen(Popular())
+                nav_bar.visibility = View.VISIBLE
+            }
+            "Manga" -> {
+                constObj.setScreen("Manga")
+                makeCurrentScreen(Popular())
+                nav_bar.visibility = View.GONE
+            }
 
-        val FUser = Firebase.auth.currentUser
-        FUser?.let {
+            else -> {
+                constObj.setScreen("Movie")
+                makeCurrentScreen(Popular())
+                nav_bar.visibility = View.VISIBLE
+            }
+        }
+
+        val fUser = Firebase.auth.currentUser
+        fUser?.let {
             for (profile in it.providerData) {
                 //(ex: google)
-                val constObj = Constant.getInstance()
                 constObj.setProviderId(profile.providerId)
                 val uid = profile.uid
-                if(constObj.getProviderId() == "password"){
-                    val firebaseUid = FUser.uid
-                    val refUsers = FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUid)
+                if (constObj.getProviderId() == "password") {
+                    val firebaseUid = fUser.uid
+                    val refUsers =
+                        FirebaseDatabase.getInstance().reference.child("Users").child(firebaseUid)
                     refUsers.addValueEventListener(object : ValueEventListener {
                         override fun onDataChange(snapshot: DataSnapshot) {
                             if (snapshot.exists()) {
@@ -160,16 +219,15 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                                 toolbarText.setTextColor(Color.WHITE)
                             }
                         }
+
                         override fun onCancelled(error: DatabaseError) {
                             TODO("Not yet implemented")
                         }
                     })
-                }
-                else{
-                    val constObj = Constant.getInstance()
+                } else {
                     constObj.setProviderId(profile.providerId)
                     val userObj = User.getInstance()
-                    FUser.reload()
+                    fUser.reload()
                     userObj.setName(profile.displayName.toString())
                     Log.d("Name", userObj.getName().toString())
                     userObj.setEmail(profile.email.toString())
@@ -179,14 +237,19 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     username.text = userObj.getName()
                     email1.text = userObj.getEmail()
                     Glide.with(this).load(Uri.parse(userObj.getUri())).into(img);
-                    Log.d("UserObj ", "${constObj.getProviderId()} ${userObj.getName()} ${userObj.getUID()} ")
+                    Log.d(
+                        "UserObj ",
+                        "${constObj.getProviderId()} ${userObj.getName()} ${userObj.getUID()} "
+                    )
                     toolbarText.setTextColor(Color.WHITE)
                 }
             }
-            val const = Constant.getInstance()
             val userObj = User.getInstance()
-            Log.d("GSignIn ", const.getProviderId())
-            Log.d("UserObj ", "${const.getProviderId()} ${userObj.getName()} ${userObj.getUID()} ")
+            Log.d("GSignIn ", constObj.getProviderId())
+            Log.d(
+                "UserObj ",
+                "${constObj.getProviderId()} ${userObj.getName()} ${userObj.getUID()} "
+            )
         }
 
         val popular = Popular()
@@ -195,7 +258,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         makeCurrentScreen(popular)
 
         nav_bar.setOnNavigationItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.popular -> {
                     makeCurrentScreen(popular)
                 }
@@ -208,22 +271,27 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             }
             true
         }
-        }
-
-    private fun makeCurrentScreen(fragment: Fragment) = supportFragmentManager.beginTransaction().apply {
-        replace(R.id.wrapper_frame, fragment)
-        commit()
     }
+
+
+    private fun makeCurrentScreen(fragment: Fragment) =
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.wrapper_frame, fragment)
+            commit()
+        }
 
     override fun onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
-        }
-        else {
-            val a = Intent(Intent.ACTION_MAIN)
-            a.addCategory(Intent.CATEGORY_HOME)
-            a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(a)
+        } else {
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                supportFragmentManager.popBackStack()
+            } else {
+                val a = Intent(Intent.ACTION_MAIN)
+                a.addCategory(Intent.CATEGORY_HOME)
+                a.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(a)
+            }
         }
     }
 
@@ -232,7 +300,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         inflater.inflate(R.menu.menu_items, menu)
         searchView = menu.findItem(R.id.Search)?.actionView as SearchView
         searchView.setOnQueryTextListener(this)
-        if(obj.getInfo()){
+        if (obj.getInfo()) {
             val register: MenuItem? = menu.findItem(R.id.logout_item)
             register?.isVisible = false
         }
@@ -245,108 +313,95 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        if(newText != null){
-            if(newText.isNotEmpty()){
+        if (newText != null) {
+            if (newText.isNotEmpty()) {
                 searchMovies(newText)
-            }
-            else{
+            } else {
                 searchRV.visibility = View.GONE
             }
         }
         return true
     }
 
-    private fun searchMovies(movie: String) {
-        when(Constant.getInstance().getScreen()){
+    private fun searchMovies(query: String) {
+        when (Constant.getInstance().getScreen()) {
             "Movie" -> {
-                MovieApiService.getInstance().create(MovieApiInterface::class.java)
-                    .searchMovie(movie, page).enqueue(object :Callback<MovieResponse>{
-                        override fun onResponse(
-                            call: Call<MovieResponse>,
-                            response: Response<MovieResponse>,
-                        ) {
-                            val movies = response.body()!!.movies
-                            Log.d("Search", movies.toString())
-                            searchRV.visibility = View.VISIBLE
-                            searchAdapter = MovieAdapter(movies as MutableList<Movies>)
-                            searchRV.adapter = AlphaInAnimationAdapter(searchAdapter)
-                            searchRV.layoutManager = GridLayoutManager(applicationContext, 2)
-                            searchAdapter.setOnItemClickListener(object: MovieAdapter.onItemClickListener{
-                                override fun onItemClick(position: Int) {
-                                    val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                                    val image = IMAGE_BASE + movies[position].poster_path.toString()
-                                    Log.d("ImageUri", image)
-                                    intent.putExtra("id", movies[position].id)
-                                    intent.putExtra("image", image)
-                                    intent.putExtra("title", movies[position].title.toString())
-                                    intent.putExtra("overview", movies[position].overview.toString())
-                                    intent.putExtra("date", movies[position].release_date)
-                                    intent.putExtra("popularity", movies[position].vote_count.toString())
-                                    intent.putExtra("voteAvg", movies[position].vote_average.toString())
-                                    startActivity(intent)
-                                }
-
-                            })
+                MovieResponse.getMovieSearch(query, page) {
+                    val movies = it.movies
+                    searchRV.visibility = View.VISIBLE
+                    searchAdapter = MovieAdapter(movies as MutableList<Movies>)
+                    searchRV.adapter = AlphaInAnimationAdapter(searchAdapter)
+                    searchRV.layoutManager = GridLayoutManager(applicationContext, 2)
+                    searchAdapter.setOnItemClickListener(object : MovieAdapter.OnItemClickListener {
+                        override fun onItemClick(position: Int, imageView: CardView) {
+                            val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                            intent.putExtra("id", movies[position].id)
+                            intent.putExtra("isMovie", true)
+                            intent.putExtra("title", movies[position].title.toString())
+                            startActivity(intent)
                         }
-
-                        override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                            TODO("Not yet implemented")
-                        }
-
                     })
+                }
+
             }
-            "TV"  -> {
-                TvApiService.getInstance().create(TvApiInterface::class.java)
-                    .getTvSearch(movie).enqueue(object :Callback<TvResponse>{
-                        override fun onResponse(
-                            call: Call<TvResponse>,
-                            response: Response<TvResponse>,
-                        ) {
-                            val movies = response.body()!!.result
-                            Log.d("Search", movies.toString())
-                            searchRV.visibility = View.VISIBLE
-                            val searchAdapter = TvAdapter(movies as MutableList<TV>)
-                            searchRV.adapter = AlphaInAnimationAdapter(searchAdapter)
-                            searchRV.layoutManager = GridLayoutManager(applicationContext, 2)
-                            searchAdapter.setOnItemClickListener(object: TvAdapter.onItemClickListener{
-                                override fun onItemClick(position: Int) {
-                                    val intent = Intent(this@MainActivity, DetailActivity::class.java)
-                                    val image = IMAGE_BASE + movies[position].poster_path.toString()
-                                    Log.d("ImageUri", image)
-                                    intent.putExtra("id", movies[position].id)
-                                    intent.putExtra("image", image)
-                                    intent.putExtra("title", movies[position].title.toString())
-                                    intent.putExtra("overview", movies[position].overview.toString())
-                                    intent.putExtra("date", movies[position].release_date)
-                                    intent.putExtra("popularity", movies[position].vote_count.toString())
-                                    intent.putExtra("voteAvg", movies[position].vote_average.toString())
-                                    startActivity(intent)
-                                }
-
-                            })
+            "TV" -> {
+                TvResponse.getTvSearch(query) {
+                    val tv = it
+                    searchRV.visibility = View.VISIBLE
+                    val searchAdapter = TvAdapter(tv as MutableList<TV>)
+                    searchRV.adapter = AlphaInAnimationAdapter(searchAdapter)
+                    searchRV.layoutManager = GridLayoutManager(applicationContext, 2)
+                    searchAdapter.setOnItemClickListener(object : TvAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                            intent.putExtra("id", tv[position].id)
+                            intent.putExtra("isTv", true)
+                            intent.putExtra("title", tv[position].title.toString())
+                            startActivity(intent)
                         }
+                    })
+                }
 
-                        override fun onFailure(call: Call<TvResponse>, t: Throwable) {
-                            TODO("Not yet implemented")
+            }
+            else -> {
+                Anime.getSearchAnime(query) {
+                    searchRV.visibility = View.VISIBLE
+                    val searchAdapter = AnimeAdapter(it)
+                    searchRV.adapter = AlphaInAnimationAdapter(searchAdapter)
+                    searchRV.layoutManager = GridLayoutManager(applicationContext, 2)
+                    searchAdapter.setOnItemClickListener(object : AnimeAdapter.OnItemClickListener {
+                        override fun onItemClick(position: Int) {
+                            val intent = Intent(this@MainActivity, DetailActivity::class.java)
+                            intent.putExtra("id", it[position].malId.toString())
+                            intent.putExtra("anime", true)
+                            intent.putExtra("title", it[position].title.toString())
+                            startActivity(intent)
                         }
 
                     })
+                }
             }
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true
         }
         when (item.itemId) {
             R.id.help_item -> Toast.makeText(applicationContext, "Help", Toast.LENGTH_SHORT)
                 .show()
             R.id.logout_item -> {
-                FirebaseAuth.getInstance().signOut()
-                startActivity(Intent(applicationContext, Login::class.java))
-                Toast.makeText(applicationContext,"Log out", Toast.LENGTH_SHORT).show()
-                this.finish()
+                if (isGSign()) {
+                    googleSignOut()
+                } else {
+                    FirebaseAuth.getInstance().signOut()
+                    val intent = Intent(applicationContext, Login::class.java)
+                    Toast.makeText(applicationContext, "Log out", Toast.LENGTH_SHORT).show()
+                    intent.addCategory(Intent.CATEGORY_HOME)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
+                }
             }
             R.id.settings -> makeCurrentScreen(SettingsFragment())
         }
@@ -355,5 +410,96 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onDestroy() {
         super.onDestroy()
+    }
+
+    private fun isGSign(): Boolean {
+        return GoogleSignIn.getLastSignedInAccount(this) != null
+    }
+
+    private fun googleSignOut() {
+        googleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.web_server_client))
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
+        mGoogleSignInClient.signOut()
+        FirebaseAuth.getInstance().signOut()
+        val intent = Intent(this, Login::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun getChapters() {
+        val mangaApiService = MangaApiService.getInstance().create(MangaApiInterface::class.java)
+
+        MangaResponse.getMangaChapters("553e781b-9b27-4520-aa6a-a98c7d749c9f") { it ->
+            val volumes = it.volumes.map { volume -> volume.value }.reversed().toList()
+            val chapters = volumes[0].chapters.map { chapter -> chapter.value }.reversed().toList()
+            val chapter = chapters[0]
+            Log.d("volumes", chapter.toString())
+        }
+
+//        mangaApiService.getChapterImages("39767d5b-f925-4ca3-9c0d-bc889ec50c45")!!.enqueue(object: Callback<ChapterImagesResponse?>{
+//            override fun onResponse(call: Call<ChapterImagesResponse?>, response: Response<ChapterImagesResponse?>) {
+//                if (response.isSuccessful) {
+//                    val chapterImagesResponse = response.body()!!
+//                    val images = chapterImagesResponse.chapter.data
+//                    val hash = chapterImagesResponse.chapter.hash
+//                    val mangaAdapter = MangaImageAdapter(images, hash)
+//                    mangaRv.adapter = mangaAdapter
+//
+//                    Log.d("response images", chapterImagesResponse.toString())
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<ChapterImagesResponse?>, t: Throwable) {
+//                Toast.makeText(applicationContext, "Error", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+//
+//        mangaApiService.getChapter("39767d5b-f925-4ca3-9c0d-bc889ec50c45")!!.enqueue(object: Callback<ChapterResponse?>{
+//            override fun onResponse(call: Call<ChapterResponse?>, response: Response<ChapterResponse?>) {
+//                if (response.isSuccessful) {
+//                    val chapterResponse = response.body()!!.data
+//                    Log.d("response", chapterResponse.toString())
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<ChapterResponse?>, t: Throwable) {
+//                Toast.makeText(applicationContext, "Error", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+    }
+
+    private fun watchMovie() {
+        val imdbId = "tt9114286" // replace with your IMDb ID
+        YtsResponse.getMovieDetail(imdbId){ movieDetails ->
+
+            // Extract the magnet URI or streaming URLs from the movieDetails object
+            val magnetUri = movieDetails.data.movie.torrents[0].url ?: ""
+            Log.d("magnet", magnetUri)
+        }
+
+
+    }
+
+    private fun buildMediaSource(uri: Uri): MediaSource {
+        val dataSourceFactory = DefaultDataSourceFactory(
+            this,
+            Util.getUserAgent(this, "OBook")
+        )
+        val extractorsFactory = DefaultExtractorsFactory()
+        return ProgressiveMediaSource.Factory(dataSourceFactory, extractorsFactory)
+            .createMediaSource(MediaItem.fromUri(uri))
+    }
+
+    private fun requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(
+                arrayOf<String>(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE),
+                REQUEST_WRITE_PERMISSION
+            )
+        }
     }
 }

@@ -3,6 +3,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url "https://jitpack.io"
+            credentials {
+                username 'VishavjeetS'
+                password 'jp_597321mi1tj5gsiuulpdv1d85r'
+            }
+        }
+        maven { url "https://dl.bintray.com/bolts-framework/android" }
         jcenter() // Warning: this repository is going to shut down soon
     }
 }

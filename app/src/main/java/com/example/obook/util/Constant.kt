@@ -7,6 +7,7 @@ class Constant {
     private var YTAPI: String = ""
     private var isTv: Boolean = false
     private var SCREEN: String = ""
+    private var GSIGN_NAME: Boolean = false
 
     companion object{
         private var instance: Constant? = null
@@ -16,6 +17,13 @@ class Constant {
             }
             return instance!!
         }
+    }
+
+    fun getGSIGN_NAME(): Boolean{
+        return GSIGN_NAME
+    }
+    fun setGSIGN_NAME(value: Boolean){
+        this.GSIGN_NAME = value
     }
     fun setScreen(screen: String){
         this.SCREEN = screen

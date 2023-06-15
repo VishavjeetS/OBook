@@ -8,10 +8,7 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.DrawableImageViewTarget
-import com.example.obook.Authentication.Login
-import com.example.obook.Authentication.SignUp
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseAuth.AuthStateListener
+import com.example.obook.authentication.Login
 
 
 class Welcome : AppCompatActivity(){

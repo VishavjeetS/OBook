@@ -24,6 +24,7 @@
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable-v24/roundstyle.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/bgndblur.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/gradient_background.xml" value="0.182" />
+        <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/ic_efresh.xml" value="0.1605" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/ic_heart.xml" value="0.182" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/movie_item_bg.xml" value="0.182" />
         <entry key="..\:/Users/visha/AndroidStudioProjects/OBook/app/src/main/res/drawable/navbar_bg.xml" value="0.1605" />
@@ -60,10 +61,17 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="OBook.app" />
+      </set>
+    </option>
   </component>
 </project>

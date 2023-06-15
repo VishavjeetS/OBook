@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dp"
-    android:layout_height="wrap_content"
+    android:id="@+id/cardview"
+    android:layout_width="wrap_content"
+    android:layout_height="300dp"
     app:cardCornerRadius="10dp"
     android:background="@color/black"
-    android:layout_marginTop="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="8dp"
+    android:transitionName="image"
     xmlns:app="http://schemas.android.com/apk/res-auto">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@color/black"
-            android:padding="5dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -20,35 +23,28 @@
                 android:layout_gravity="center">
                 <ImageView
                     android:id="@+id/poster"
-                    android:layout_width="100dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
+                    android:layout_width="200dp"
+                    android:layout_height="300dp"
+
+                    android:layout_gravity="center"
                     android:src="@drawable/ic_launcher_background"/>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/ambientBg"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:layout_gravity="center"
+                android:layout_marginTop="-25dp"
                 android:orientation="vertical">
-
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/movie_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/movie_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Movie Title"
-                        android:layout_centerHorizontal="true"
-                        android:textSize="15sp"
-                        android:gravity="center"
-                        android:textColor="@color/white"/>
-
-                </RelativeLayout>
+                    android:text="Movie Title"
+                    android:textSize="17sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"/>
             </LinearLayout>
         </LinearLayout>
 </androidx.cardview.widget.CardView>
